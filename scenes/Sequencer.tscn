@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://v5e1u5ggtnj5"]
+
+[ext_resource type="Script" path="res://scripts/Sequencer.gd" id="1_ahd75"]
+
+[node name="Sequencer" type="GraphNode"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -945.0
+offset_bottom = -334.0
+grow_horizontal = 2
+grow_vertical = 2
+title = "Sequencer"
+show_close = true
+script = ExtResource("1_ahd75")
+
+[connection signal="close_request" from="." to="." method="_on_close_request"]
