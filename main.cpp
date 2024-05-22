@@ -13,6 +13,9 @@ void processInput(GLFWwindow* window);
 int windowWidth = 800;
 int windowHeight = 600;
 
+int squareSize = 100;
+int deadZone = 30;
+
 bool isMouseHeld = false;
 bool isSpacePressed = false;
 
@@ -20,8 +23,8 @@ double dragForce = 4000;
 
 double damping = 200;
 
-
 using Vec2 = sf::Vector2f;
+
 
 Vec2 normalize(const Vec2& vector)
 {
@@ -83,17 +86,25 @@ void updatePositions(std::vector<physicsObject>& physicsObjects, float dt)
 }
 
 
+int selectedObject = -1;
+
 void applyDrag(std::vector<physicsObject>& physicsObjects)
 {
-    for (auto& obj: physicsObjects)
+    for (size_t i = 0; i < physicsObjects.size(); ++i)
     {
-        Vec2 acceleration;
-        if (isMouseHeld)
+        auto& obj = physicsObjects[i];
+        Vec2 distV = Vec2(xpos, ypos) - obj.position_current;
+        double distance = std::sqrt(distV.x * distV.x + distV.y * distV.y);
+
+        if (isMouseHeld && (selectedObject == -1 || selectedObject == i))
         {
-            Vec2 dirToMouse = normalize(Vec2(xpos, ypos) - obj.position_current);
-            acceleration = Vec2(dragForce * dirToMouse.x, dragForce * dirToMouse.y);
+            if (distance < squareSize / 2.0f || selectedObject == i)
+            {
+                selectedObject = i;
+                obj.position_current = Vec2(xpos, ypos);
+                break;
+            }
         }
-        obj.accelerate(acceleration);
     }
 }
 
@@ -105,6 +116,59 @@ void applyDamping(std::vector<physicsObject>& physicsObjects)
         obj.accelerate(-Vec2(obj.velocity.x * damping, obj.velocity.y * damping));
     }
 }
+
+
+void solveCollisions(std::vector<physicsObject>& physicsObjects)
+{
+    const double restitution = 0.9; // Coefficient of restitution (bounciness)
+    const double squareSize = 100.0; // Size of the square
+
+    for (size_t i = 0; i < physicsObjects.size(); ++i)
+    {
+        for (size_t j = i + 1; j < physicsObjects.size(); ++j)
+        {
+            auto& obj1 = physicsObjects[i];
+            auto& obj2 = physicsObjects[j];
+
+            Vec2 pos1 = obj1.position_current;
+            Vec2 pos2 = obj2.position_current;
+
+            Vec2 delta = pos2 - pos1;
+            double distSquared = delta.x * delta.x + delta.y * delta.y;
+            double minDist = squareSize;
+            double minDistSquared = minDist * minDist;
+
+            if (distSquared < minDistSquared)
+            {
+                double dist = std::sqrt(distSquared);
+                Vec2 collision_axis = (dist != 0.0) ? Vec2(delta.x / dist, delta.y / dist) : Vec2(1.0f, 0.0f); // Avoid division by zero
+
+                // Adjust positions to resolve overlap
+                double overlap = 0.5 * (minDist - dist);
+                obj1.position_current -= Vec2(overlap * collision_axis.x, overlap * collision_axis.y);
+                obj2.position_current += Vec2(overlap * collision_axis.x, overlap * collision_axis.y);
+
+                // Calculate relative velocity
+                Vec2 relativeVelocity = obj2.velocity - obj1.velocity;
+                double velAlongNormal = relativeVelocity.x * collision_axis.x + relativeVelocity.y * collision_axis.y;
+
+                // Do not resolve if velocities are separating
+                if (velAlongNormal > 0)
+                    continue;
+
+                // Calculate impulse scalar
+                double j = -(1 + restitution) * velAlongNormal;
+                j /= 2; // Divide by the sum of the inverse masses (assuming equal mass)
+
+                // Apply impulse
+                Vec2 impulse = Vec2(j * collision_axis.x, j * collision_axis.x);
+                obj1.velocity -= impulse;
+                obj2.velocity += impulse;
+            }
+        }
+    }
+}
+
 
 
 void physicsProcess(std::vector<physicsObject>& physicsObjects, float dt)
@@ -119,9 +183,9 @@ void physicsProcess(std::vector<physicsObject>& physicsObjects, float dt)
         updatePositions(physicsObjects, dt);
         applyDrag(physicsObjects);
         applyDamping(physicsObjects);
+        solveCollisions(physicsObjects);
         // applyGravity();
         // applyConstraint();
-        // solveCollisions();
     }
 }
 
@@ -131,7 +195,6 @@ void render()
     for (physicsObject& obj : physicsObjects)
     {
         // Pixel coordinates for the square
-        int squareSize = 100;
         int x = obj.position_current.x; // X position in pixels
         int y = obj.position_current.y; // Y position in pixels
 
@@ -155,7 +218,6 @@ void render()
 }
 
 
-
 static void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
 {
     ::xpos = xpos;
@@ -168,7 +230,10 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
     if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
         isMouseHeld = true;
     else if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE)
+    {
         isMouseHeld = false;
+        selectedObject = -1;
+    }
 }
 
 
@@ -264,5 +329,3 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
     glViewport(0, 0, width, height);
 }
-
-
