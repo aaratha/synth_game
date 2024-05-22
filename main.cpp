@@ -95,13 +95,15 @@ void applyDrag(std::vector<physicsObject>& physicsObjects)
         auto& obj = physicsObjects[i];
         Vec2 distV = Vec2(xpos, ypos) - obj.position_current;
         double distance = std::sqrt(distV.x * distV.x + distV.y * distV.y);
+        Vec2 direction = normalize(distV);
 
         if (isMouseHeld && (selectedObject == -1 || selectedObject == i))
         {
             if (distance < squareSize / 2.0f || selectedObject == i)
             {
                 selectedObject = i;
-                obj.position_current = Vec2(xpos, ypos);
+                Vec2 acceleration = Vec2(dragForce * direction.x, dragForce * direction.y);
+                obj.accelerate(acceleration);
                 break;
             }
         }
