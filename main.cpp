@@ -15,7 +15,9 @@ int windowHeight = 600;
 
 bool isMouseHeld = false;
 
-double dragForce = 1;
+double dragForce = 4000;
+
+double damping = 200;
 
 
 using Vec2 = sf::Vector2f;
@@ -33,16 +35,19 @@ Vec2 normalize(const Vec2& vector)
 
 struct physicsObject
 {
+    Vec2 velocity;
     Vec2 position_current;
     Vec2 position_old;
     Vec2 acceleration;
 
     void updatePosition(float dt)
     {
-        const Vec2 velocity = position_current - position_old;
+        velocity = position_current - position_old;
         position_old = position_current;
         position_current = position_current + velocity + acceleration * dt * dt;
         acceleration = {};
+
+        // std::cout << position_current.x << position_current.y;
     }
 
     void accelerate(Vec2 acc)
@@ -56,6 +61,7 @@ double xpos, ypos;
 
 std::vector<physicsObject> physicsObjects;
 
+
 void updatePositions(std::vector<physicsObject>& physicsObjects, float dt)
 {
     for (auto& obj : physicsObjects)
@@ -64,6 +70,7 @@ void updatePositions(std::vector<physicsObject>& physicsObjects, float dt)
     }
 }
 
+
 void applyDrag(std::vector<physicsObject>& physicsObjects)
 {
     for (auto& obj: physicsObjects)
@@ -71,10 +78,19 @@ void applyDrag(std::vector<physicsObject>& physicsObjects)
         Vec2 acceleration;
         if (isMouseHeld)
         {
-            Vec2 dirToMouse = Vec2(xpos, ypos) - obj.position_current;
-            Vec2 acceleration = Vec2(dragForce * dirToMouse.x, dragForce * dirToMouse.y);
+            Vec2 dirToMouse = normalize(Vec2(xpos, ypos) - obj.position_current);
+            acceleration = Vec2(dragForce * dirToMouse.x, dragForce * dirToMouse.y);
         }
         obj.accelerate(acceleration);
+    }
+}
+
+
+void applyDamping(std::vector<physicsObject>& physicsObjects)
+{
+    for (auto& obj: physicsObjects)
+    {
+        obj.accelerate(-Vec2(obj.velocity.x * damping, obj.velocity.y * damping));
     }
 }
 
@@ -90,6 +106,7 @@ void physicsProcess(std::vector<physicsObject>& physicsObjects, float dt)
     {
         updatePositions(physicsObjects, dt);
         applyDrag(physicsObjects);
+        applyDamping(physicsObjects);
         // applyGravity();
         // applyConstraint();
         // solveCollisions();
@@ -103,14 +120,18 @@ void render()
     {
         // Pixel coordinates for the square
         int squareSize = 100;
-        int x = 350; // X position in pixels
-        int y = 250; // Y position in pixels
+        int x = obj.position_current.x; // X position in pixels
+        int y = obj.position_current.y; // Y position in pixels
+
+        // Calculate the center of the square
+        float centerX = x - squareSize / 2.0f;
+        float centerY = y - squareSize / 2.0f;
 
         // Convert pixel coordinates to normalized device coordinates
-        float left = 2.0f * x / windowWidth - 1.0f;
-        float right = 2.0f * (x + squareSize) / windowWidth - 1.0f;
-        float top = 1.0f - 2.0f * y / windowHeight;
-        float bottom = 1.0f - 2.0f * (y + squareSize) / windowHeight;
+        float left = 2.0f * centerX / windowWidth - 1.0f;
+        float right = 2.0f * (centerX + squareSize) / windowWidth - 1.0f;
+        float top = 1.0f - 2.0f * centerY / windowHeight;
+        float bottom = 1.0f - 2.0f * (centerY + squareSize) / windowHeight;
 
         glBegin(GL_POLYGON);
             glVertex2f(left, top);
@@ -120,6 +141,7 @@ void render()
         glEnd();
     }
 }
+
 
 
 static void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
@@ -177,6 +199,15 @@ int main()
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     glfwSetCursorPosCallback(window, cursor_position_callback);
     glfwSetMouseButtonCallback(window, mouse_button_callback);
+
+
+    physicsObject obj;
+    obj.position_current = Vec2(400,300);
+    obj.position_old = Vec2(400,300);
+    obj.acceleration = Vec2(0,0);
+
+    physicsObjects.push_back(obj);
+
 
     while (!glfwWindowShouldClose(window))
     {
