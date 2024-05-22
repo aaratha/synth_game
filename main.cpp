@@ -14,6 +14,7 @@ int windowWidth = 800;
 int windowHeight = 600;
 
 bool isMouseHeld = false;
+bool isSpacePressed = false;
 
 double dragForce = 4000;
 
@@ -60,6 +61,17 @@ struct physicsObject
 double xpos, ypos;
 
 std::vector<physicsObject> physicsObjects;
+
+
+void instantiate(double x, double y)
+{
+    physicsObject obj;
+    obj.position_current = Vec2(x,y);
+    obj.position_old = Vec2(x,y);
+    obj.acceleration = Vec2(0,0);
+
+    physicsObjects.push_back(obj);
+}
 
 
 void updatePositions(std::vector<physicsObject>& physicsObjects, float dt)
@@ -160,6 +172,18 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 }
 
 
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+    if (key == GLFW_KEY_SPACE && action == GLFW_PRESS)
+    {
+        isSpacePressed = true;
+        instantiate(xpos, ypos);
+    }
+    else
+        isSpacePressed = false;
+}
+
+
 int main()
 {
     // Initialize GLFW
@@ -199,14 +223,9 @@ int main()
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     glfwSetCursorPosCallback(window, cursor_position_callback);
     glfwSetMouseButtonCallback(window, mouse_button_callback);
+    glfwSetKeyCallback(window, key_callback);
 
 
-    physicsObject obj;
-    obj.position_current = Vec2(400,300);
-    obj.position_old = Vec2(400,300);
-    obj.acceleration = Vec2(0,0);
-
-    physicsObjects.push_back(obj);
 
 
     while (!glfwWindowShouldClose(window))
