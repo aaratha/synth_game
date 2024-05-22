@@ -1,68 +1,127 @@
 #include <iostream>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include <Eigen/Dense>
-#include <SFML/System/Vector2.h>
+#include <eigen3/Eigen/Dense>
+#include <SFML/Graphics.hpp>
+#include <cmath>
 
 // Function prototypes
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow* window);
+
 
 int windowWidth = 800;
 int windowHeight = 600;
 
 bool isMouseHeld = false;
 
+double dragForce = 1;
+
+
+using Vec2 = sf::Vector2f;
+
+Vec2 normalize(const Vec2& vector)
+{
+    float length = std::sqrt(vector.x * vector.x + vector.y * vector.y);
+    if (length != 0)
+    {
+        return Vec2(vector.x / length, vector.y / length);
+    }
+    return vector;
+}
+
 
 struct physicsObject
 {
-    sf::vector2 position_current;
-    sf::vector2 position_old;
-    sf::vector2 acceleration;
+    Vec2 position_current;
+    Vec2 position_old;
+    Vec2 acceleration;
 
-    void updatePosition(float dt) {
-        const std::vector<double> velocity = position_current - position_old;
+    void updatePosition(float dt)
+    {
+        const Vec2 velocity = position_current - position_old;
         position_old = position_current;
         position_current = position_current + velocity + acceleration * dt * dt;
+        acceleration = {};
+    }
+
+    void accelerate(Vec2 acc)
+    {
+        acceleration += acc;
+    }
+};
+
+
+double xpos, ypos;
+
+std::vector<physicsObject> physicsObjects;
+
+void updatePositions(std::vector<physicsObject>& physicsObjects, float dt)
+{
+    for (auto& obj : physicsObjects)
+    {
+        obj.updatePosition(dt);
+    }
+}
+
+void applyDrag(std::vector<physicsObject>& physicsObjects)
+{
+    for (auto& obj: physicsObjects)
+    {
+        Vec2 acceleration;
+        if (isMouseHeld)
+        {
+            Vec2 dirToMouse = Vec2(xpos, ypos) - obj.position_current;
+            Vec2 acceleration = Vec2(dragForce * dirToMouse.x, dragForce * dirToMouse.y);
+        }
+        obj.accelerate(acceleration);
     }
 }
 
 
-void verlet()
+void physicsProcess(std::vector<physicsObject>& physicsObjects, float dt)
 {
 
-}
+    const int sub_steps = 2;
+    const float sub_dt = dt / sub_steps;
 
-
-void physics()
-{
-
+    // the secret sauce: substeps...
+    for (int i = 0; i < sub_steps; i++)
+    {
+        updatePositions(physicsObjects, dt);
+        applyDrag(physicsObjects);
+        // applyGravity();
+        // applyConstraint();
+        // solveCollisions();
+    }
 }
 
 
 void render()
 {
-    // Pixel coordinates for the square
-    int squareSize = 100;
-    int x = 350; // X position in pixels
-    int y = 250; // Y position in pixels
+    for (physicsObject& obj : physicsObjects)
+    {
+        // Pixel coordinates for the square
+        int squareSize = 100;
+        int x = 350; // X position in pixels
+        int y = 250; // Y position in pixels
 
-    // Convert pixel coordinates to normalized device coordinates
-    float left = 2.0f * x / windowWidth - 1.0f;
-    float right = 2.0f * (x + squareSize) / windowWidth - 1.0f;
-    float top = 1.0f - 2.0f * y / windowHeight;
-    float bottom = 1.0f - 2.0f * (y + squareSize) / windowHeight;
+        // Convert pixel coordinates to normalized device coordinates
+        float left = 2.0f * x / windowWidth - 1.0f;
+        float right = 2.0f * (x + squareSize) / windowWidth - 1.0f;
+        float top = 1.0f - 2.0f * y / windowHeight;
+        float bottom = 1.0f - 2.0f * (y + squareSize) / windowHeight;
 
-    glBegin(GL_POLYGON);
-        glVertex2f(left, top);
-        glVertex2f(right, top);
-        glVertex2f(right, bottom);
-        glVertex2f(left, bottom);
-    glEnd();
+        glBegin(GL_POLYGON);
+            glVertex2f(left, top);
+            glVertex2f(right, top);
+            glVertex2f(right, bottom);
+            glVertex2f(left, bottom);
+        glEnd();
+    }
 }
 
 
-double xpos, ypos;
 static void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
 {
     ::xpos = xpos;
@@ -126,6 +185,8 @@ int main()
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
+        float dt = 0.016f;
+        physicsProcess(physicsObjects,dt);
         render();
 
         // Debug checks
@@ -153,3 +214,5 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
     glViewport(0, 0, width, height);
 }
+
+
