@@ -1,5 +1,6 @@
 #include "input.h"
 #include "physics.h"
+#include <iostream>
 
 void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
 {
@@ -24,6 +25,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
     {
         isSpacePressed = true;
         instantiate(xpos, ypos);
+        std::cout << "space" << std::endl;
     }
     else
         isSpacePressed = false;

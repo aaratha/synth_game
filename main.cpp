@@ -8,7 +8,6 @@
 #include "render.h"
 #include "constants.h"
 
-
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow* window);
 
@@ -70,6 +69,8 @@ int main()
     glfwSetCursorPosCallback(window, cursor_position_callback);
     glfwSetMouseButtonCallback(window, mouse_button_callback);
     glfwSetKeyCallback(window, key_callback);
+
+    initRender();
 
     while (!glfwWindowShouldClose(window))
     {
