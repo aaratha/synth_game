@@ -1,14 +1,12 @@
 #include <iostream>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include <eigen3/Eigen/Dense>
 #include <SFML/Graphics.hpp>
 #include <cmath>
 
 // Function prototypes
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow* window);
-
 
 int windowWidth = 800;
 int windowHeight = 600;
@@ -25,7 +23,6 @@ double damping = 200;
 
 using Vec2 = sf::Vector2f;
 
-
 Vec2 normalize(const Vec2& vector)
 {
     float length = std::sqrt(vector.x * vector.x + vector.y * vector.y);
@@ -35,7 +32,6 @@ Vec2 normalize(const Vec2& vector)
     }
     return vector;
 }
-
 
 struct physicsObject
 {
@@ -50,8 +46,6 @@ struct physicsObject
         position_old = position_current;
         position_current = position_current + velocity + acceleration * dt * dt;
         acceleration = {};
-
-        // std::cout << position_current.x << position_current.y;
     }
 
     void accelerate(Vec2 acc)
@@ -60,22 +54,19 @@ struct physicsObject
     }
 };
 
-
 double xpos, ypos;
 
 std::vector<physicsObject> physicsObjects;
 
-
 void instantiate(double x, double y)
 {
     physicsObject obj;
-    obj.position_current = Vec2(x,y);
-    obj.position_old = Vec2(x,y);
-    obj.acceleration = Vec2(0,0);
+    obj.position_current = Vec2(x, y);
+    obj.position_old = Vec2(x, y);
+    obj.acceleration = Vec2(0, 0);
 
     physicsObjects.push_back(obj);
 }
-
 
 void updatePositions(std::vector<physicsObject>& physicsObjects, float dt)
 {
@@ -84,7 +75,6 @@ void updatePositions(std::vector<physicsObject>& physicsObjects, float dt)
         obj.updatePosition(dt);
     }
 }
-
 
 int selectedObject = -1;
 
@@ -102,23 +92,24 @@ void applyDrag(std::vector<physicsObject>& physicsObjects)
             if (distance < squareSize / 2.0f || selectedObject == i)
             {
                 selectedObject = i;
-                Vec2 acceleration = Vec2(dragForce * direction.x, dragForce * direction.y);
-                obj.accelerate(acceleration);
+                if (distance > deadZone)
+                {
+                    Vec2 acceleration = Vec2(dragForce * direction.x, dragForce * direction.y);
+                    obj.accelerate(acceleration);
+                }
                 break;
             }
         }
     }
 }
 
-
 void applyDamping(std::vector<physicsObject>& physicsObjects)
 {
-    for (auto& obj: physicsObjects)
+    for (auto& obj : physicsObjects)
     {
         obj.accelerate(-Vec2(obj.velocity.x * damping, obj.velocity.y * damping));
     }
 }
-
 
 void solveCollisions(std::vector<physicsObject>& physicsObjects)
 {
@@ -171,11 +162,8 @@ void solveCollisions(std::vector<physicsObject>& physicsObjects)
     }
 }
 
-
-
 void physicsProcess(std::vector<physicsObject>& physicsObjects, float dt)
 {
-
     const int sub_steps = 2;
     const float sub_dt = dt / sub_steps;
 
@@ -191,9 +179,11 @@ void physicsProcess(std::vector<physicsObject>& physicsObjects, float dt)
     }
 }
 
+GLuint textureID;
 
 void render()
 {
+    glBindTexture(GL_TEXTURE_2D, textureID);
     for (physicsObject& obj : physicsObjects)
     {
         // Pixel coordinates for the square
@@ -210,22 +200,21 @@ void render()
         float top = 1.0f - 2.0f * centerY / windowHeight;
         float bottom = 1.0f - 2.0f * (centerY + squareSize) / windowHeight;
 
-        glBegin(GL_POLYGON);
-            glVertex2f(left, top);
-            glVertex2f(right, top);
-            glVertex2f(right, bottom);
-            glVertex2f(left, bottom);
+        glBegin(GL_QUADS);
+            glTexCoord2f(0.0f, 0.0f); glVertex2f(left, top);
+            glTexCoord2f(1.0f, 0.0f); glVertex2f(right, top);
+            glTexCoord2f(1.0f, 1.0f); glVertex2f(right, bottom);
+            glTexCoord2f(0.0f, 1.0f); glVertex2f(left, bottom);
         glEnd();
     }
+    glBindTexture(GL_TEXTURE_2D, 0);
 }
-
 
 static void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
 {
     ::xpos = xpos;
     ::ypos = ypos;
 }
-
 
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 {
@@ -238,7 +227,6 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
     }
 }
 
-
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
     if (key == GLFW_KEY_SPACE && action == GLFW_PRESS)
@@ -250,7 +238,6 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
         isSpacePressed = false;
 }
 
-
 int main()
 {
     // Initialize GLFW
@@ -260,74 +247,82 @@ int main()
         return -1;
     }
 
-    #ifdef __APPLE__
-        glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // For MacOS
-    #endif
-
-    // Create a windowed mode window and its OpenGL context
-    GLFWwindow* window = glfwCreateWindow(windowWidth, windowHeight, "GLFW OpenGL Game", nullptr, nullptr);
+    // Create a GLFWwindow object
+    GLFWwindow* window = glfwCreateWindow(windowWidth, windowHeight, "Physics Simulation", NULL, NULL);
     if (!window)
     {
         std::cerr << "Failed to create GLFW window" << std::endl;
         glfwTerminate();
         return -1;
     }
-
-    // Make the window's context current
     glfwMakeContextCurrent(window);
 
     // Initialize GLEW
-    glewExperimental = true; // Needed for core profile
+    glewExperimental = GL_TRUE;
     if (glewInit() != GLEW_OK)
     {
         std::cerr << "Failed to initialize GLEW" << std::endl;
         return -1;
     }
 
-    glViewport(0, 0, windowWidth, windowHeight);
-
-    // Callbacks
+    // Set the required callback functions
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     glfwSetCursorPosCallback(window, cursor_position_callback);
     glfwSetMouseButtonCallback(window, mouse_button_callback);
     glfwSetKeyCallback(window, key_callback);
 
+    // Load texture using SFML
+    sf::Texture texture;
+    if (!texture.loadFromFile("./texture.png"))
+    {
+        std::cerr << "Failed to load texture" << std::endl;
+        return -1;
+    }
 
+    // Create OpenGL texture from SFML texture
+    glGenTextures(1, &textureID);
+    glBindTexture(GL_TEXTURE_2D, textureID);
 
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, texture.getSize().x, texture.getSize().y, 0, GL_RGBA, GL_UNSIGNED_BYTE, texture.copyToImage().getPixelsPtr());
 
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glBindTexture(GL_TEXTURE_2D, 0);
+
+    // Main loop
     while (!glfwWindowShouldClose(window))
     {
+        // Input
         processInput(window);
 
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+        // Clear the colorbuffer
         glClear(GL_COLOR_BUFFER_BIT);
 
-        float dt = 0.016f;
-        physicsProcess(physicsObjects,dt);
+        // Render
         render();
 
-        // Debug checks
-        // std::cout << "Cursor Position: (" << xpos << ", " << ypos << ")" << std::endl;
-        // std::cout << "isMouseHeld: " << isMouseHeld << std::endl;
-
+        // Swap the screen buffers
         glfwSwapBuffers(window);
+
+        // Poll for and process events
         glfwPollEvents();
     }
+
+    // Terminate GLFW
     glfwTerminate();
     return 0;
 }
 
+void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+{
+    glViewport(0, 0, width, height);
+    windowWidth = width;
+    windowHeight = height;
+}
 
-// Function to process input
 void processInput(GLFWwindow* window)
 {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
 }
 
-
-// Callback function to adjust the viewport size when the window size changes
-void framebuffer_size_callback(GLFWwindow* window, int width, int height)
-{
-    glViewport(0, 0, width, height);
-}
