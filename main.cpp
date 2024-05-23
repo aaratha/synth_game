@@ -6,6 +6,9 @@
 #include <SDL2/SDL.h>
 #include <cmath>
 
+// build command:
+//     c++ -o engine main.cpp -lGL -lGLEW -lglfw -lGLU -lsfml-graphics -lSDL2
+
 // Function prototypes
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow* window);
@@ -355,6 +358,8 @@ int main()
 
         glfwSwapBuffers(window);
         glfwPollEvents();
+
+        // FREQUENCY = std::sqrt(xpos*xpos + ypos*ypos);
     }
     SDL_CloseAudio();
     SDL_Quit();
