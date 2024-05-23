@@ -59,6 +59,7 @@ Vec2 normalize(const Vec2& vector)
     return vector;
 }
 
+
 struct physicsObject
 {
     Vec2 velocity;
@@ -80,9 +81,11 @@ struct physicsObject
     }
 };
 
+
 double xpos, ypos;
 
 std::vector<physicsObject> physicsObjects;
+
 
 void instantiate(double x, double y)
 {
@@ -94,6 +97,7 @@ void instantiate(double x, double y)
     physicsObjects.push_back(obj);
 }
 
+
 void updatePositions(std::vector<physicsObject>& physicsObjects, float dt)
 {
     for (auto& obj : physicsObjects)
@@ -101,6 +105,7 @@ void updatePositions(std::vector<physicsObject>& physicsObjects, float dt)
         obj.updatePosition(dt);
     }
 }
+
 
 int selectedObject = -1;
 
@@ -129,6 +134,7 @@ void applyDrag(std::vector<physicsObject>& physicsObjects)
     }
 }
 
+
 void applyDamping(std::vector<physicsObject>& physicsObjects)
 {
     for (auto& obj: physicsObjects)
@@ -136,6 +142,7 @@ void applyDamping(std::vector<physicsObject>& physicsObjects)
         obj.accelerate(-Vec2(obj.velocity.x * damping, obj.velocity.y * damping));
     }
 }
+
 
 void solveCollisions(std::vector<physicsObject>& physicsObjects)
 {
@@ -188,6 +195,7 @@ void solveCollisions(std::vector<physicsObject>& physicsObjects)
     }
 }
 
+
 void physicsProcess(std::vector<physicsObject>& physicsObjects, float dt)
 {
     const int sub_steps = 2;
@@ -204,6 +212,7 @@ void physicsProcess(std::vector<physicsObject>& physicsObjects, float dt)
         // applyConstraint();
     }
 }
+
 
 void render()
 {
@@ -232,11 +241,13 @@ void render()
     }
 }
 
+
 static void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
 {
     ::xpos = xpos;
     ::ypos = ypos;
 }
+
 
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 {
@@ -248,6 +259,7 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
         selectedObject = -1;
     }
 }
+
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
@@ -261,7 +273,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 }
 
 
-int main(int argc, char* argv[])
+int main()
 {
     // Initialize GLFW
     if (!glfwInit())
@@ -349,6 +361,7 @@ int main(int argc, char* argv[])
     glfwTerminate();
     return 0;
 }
+
 
 // Function to process input
 void processInput(GLFWwindow* window)
