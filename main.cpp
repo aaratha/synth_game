@@ -35,23 +35,6 @@ double FREQUENCY = 440;
 using Vec2 = sf::Vector2f;
 
 
-void audio_callback(void* userData, Uint8* stream, int len)
-{
-    static double phase = 0.0;
-    double phaseIncrement = 2.0 * M_PI * FREQUENCY / SAMPLE_RATE;
-    int16_t* buffer = reinterpret_cast<int16_t*>(stream);
-    int samples = len / sizeof(int16_t);
-
-    for (int i = 0; i < samples; i++)
-    {
-        buffer[i] = static_cast<int16_t>(AMPLITUDE * std::sin(phase));
-        phase += phaseIncrement;
-        if (phase >= 2.0 * M_PI)
-            phase -= 2.0 * M_PI;
-    }
-}
-
-
 Vec2 normalize(const Vec2& vector)
 {
     float length = std::sqrt(vector.x * vector.x + vector.y * vector.y);
@@ -85,25 +68,65 @@ struct physicsObject
 };
 
 
+struct Module : public physicsObject
+{
+    int frequency;
+    int amplitude;
+    double phase;
+
+    Module(int freq, int amp) : frequency(freq), amplitude(amp), phase(0.0) {}
+
+    void generateSound(double dt)
+    {
+        double phaseIncrement = 2.0 * M_PI * frequency / SAMPLE_RATE;
+        phase += phaseIncrement * dt;
+        if (phase >= 2.0 * M_PI)
+            phase -= 2.0 * M_PI;
+    }
+};
+
+
 double xpos, ypos;
 
-std::vector<physicsObject> physicsObjects;
+std::vector<Module> Modules;
+
+
+void audio_callback(void* userData, Uint8* stream, int len)
+{
+    static double phase = 0.0;
+    double phaseIncrement = 2.0 * M_PI * FREQUENCY / SAMPLE_RATE;
+    int16_t* buffer = reinterpret_cast<int16_t*>(stream);
+    int samples = len / sizeof(int16_t);
+
+    for (int i = 0; i < samples; i++)
+    {
+        int sampleValue = 0;
+        for (auto& Module : Modules)
+        {
+            sampleValue += static_cast<int16_t>(Module.amplitude * std::sin(Module.phase));
+            Module.generateSound(1.0 / SAMPLE_RATE);
+        }
+        if (sampleValue > 32767) sampleValue = 32767;
+        if (sampleValue < -32768) sampleValue = -32768;
+        buffer[i] = sampleValue;
+    }
+}
 
 
 void instantiate(double x, double y)
 {
-    physicsObject obj;
+    Module obj(440, 28000);
     obj.position_current = Vec2(x,y);
     obj.position_old = Vec2(x,y);
     obj.acceleration = Vec2(0,0);
 
-    physicsObjects.push_back(obj);
+    Modules.push_back(obj);
 }
 
 
-void updatePositions(std::vector<physicsObject>& physicsObjects, float dt)
+void updatePositions(std::vector<Module>& Modules, float dt)
 {
-    for (auto& obj : physicsObjects)
+    for (auto& obj : Modules)
     {
         obj.updatePosition(dt);
     }
@@ -112,11 +135,11 @@ void updatePositions(std::vector<physicsObject>& physicsObjects, float dt)
 
 int selectedObject = -1;
 
-void applyDrag(std::vector<physicsObject>& physicsObjects)
+void applyDrag(std::vector<Module>& Modules)
 {
-    for (size_t i = 0; i < physicsObjects.size(); ++i)
+    for (size_t i = 0; i < Modules.size(); ++i)
     {
-        auto& obj = physicsObjects[i];
+        auto& obj = Modules[i];
         Vec2 distV = Vec2(xpos, ypos) - obj.position_current;
         double distance = std::sqrt(distV.x * distV.x + distV.y * distV.y);
         Vec2 direction = normalize(distV);
@@ -138,26 +161,26 @@ void applyDrag(std::vector<physicsObject>& physicsObjects)
 }
 
 
-void applyDamping(std::vector<physicsObject>& physicsObjects)
+void applyDamping(std::vector<Module>& Modules)
 {
-    for (auto& obj: physicsObjects)
+    for (auto& obj: Modules)
     {
         obj.accelerate(-Vec2(obj.velocity.x * damping, obj.velocity.y * damping));
     }
 }
 
 
-void solveCollisions(std::vector<physicsObject>& physicsObjects)
+void solveCollisions(std::vector<Module>& Modules)
 {
     const double restitution = 0.9; // Coefficient of restitution (bounciness)
     const double squareSize = 100.0; // Size of the square
 
-    for (size_t i = 0; i < physicsObjects.size(); ++i)
+    for (size_t i = 0; i < Modules.size(); ++i)
     {
-        for (size_t j = i + 1; j < physicsObjects.size(); ++j)
+        for (size_t j = i + 1; j < Modules.size(); ++j)
         {
-            auto& obj1 = physicsObjects[i];
-            auto& obj2 = physicsObjects[j];
+            auto& obj1 = Modules[i];
+            auto& obj2 = Modules[j];
 
             Vec2 pos1 = obj1.position_current;
             Vec2 pos2 = obj2.position_current;
@@ -199,7 +222,7 @@ void solveCollisions(std::vector<physicsObject>& physicsObjects)
 }
 
 
-void physicsProcess(std::vector<physicsObject>& physicsObjects, float dt)
+void physicsProcess(std::vector<Module>& Modules, float dt)
 {
     const int sub_steps = 2;
     const float sub_dt = dt / sub_steps;
@@ -207,10 +230,10 @@ void physicsProcess(std::vector<physicsObject>& physicsObjects, float dt)
     // the secret sauce: substeps...
     for (int i = 0; i < sub_steps; i++)
     {
-        updatePositions(physicsObjects, dt);
-        applyDrag(physicsObjects);
-        applyDamping(physicsObjects);
-        solveCollisions(physicsObjects);
+        updatePositions(Modules, dt);
+        applyDrag(Modules);
+        applyDamping(Modules);
+        solveCollisions(Modules);
         // applyGravity();
         // applyConstraint();
     }
@@ -219,7 +242,7 @@ void physicsProcess(std::vector<physicsObject>& physicsObjects, float dt)
 
 void render()
 {
-    for (physicsObject& obj : physicsObjects)
+    for (Module& obj : Modules)
     {
         // Pixel coordinates for the square
         int x = obj.position_current.x; // X position in pixels
@@ -349,7 +372,7 @@ int main()
         glClear(GL_COLOR_BUFFER_BIT);
 
         float dt = 0.016f;
-        physicsProcess(physicsObjects,dt);
+        physicsProcess(Modules,dt);
         render();
 
         // Debug checks
@@ -381,3 +404,4 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
     glViewport(0, 0, width, height);
 }
+
