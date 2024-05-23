@@ -1,7 +1,9 @@
 #include <iostream>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <eigen3/Eigen/Dense>
 #include <SFML/Graphics.hpp>
+#include <SDL2/SDL.h>
 #include <cmath>
 
 // Function prototypes
@@ -21,7 +23,31 @@ double dragForce = 4000;
 
 double damping = 200;
 
+// initial voltage
+double V = 1;
+const int SAMPLE_RATE = 44100;
+double AMPLITUDE = 28000;
+double FREQUENCY = 440;
+
 using Vec2 = sf::Vector2f;
+
+
+void audio_callback(void* userData, Uint8* stream, int len)
+{
+    static double phase = 0.0;
+    double phaseIncrement = 2.0 * M_PI * FREQUENCY / SAMPLE_RATE;
+    int16_t* buffer = reinterpret_cast<int16_t*>(stream);
+    int samples = len / sizeof(int16_t);
+
+    for (int i = 0; i < samples; i++)
+    {
+        buffer[i] = static_cast<int16_t>(AMPLITUDE * std::sin(phase));
+        phase += phaseIncrement;
+        if (phase >= 2.0 * M_PI)
+            phase -= 2.0 * M_PI;
+    }
+}
+
 
 Vec2 normalize(const Vec2& vector)
 {
@@ -61,9 +87,9 @@ std::vector<physicsObject> physicsObjects;
 void instantiate(double x, double y)
 {
     physicsObject obj;
-    obj.position_current = Vec2(x, y);
-    obj.position_old = Vec2(x, y);
-    obj.acceleration = Vec2(0, 0);
+    obj.position_current = Vec2(x,y);
+    obj.position_old = Vec2(x,y);
+    obj.acceleration = Vec2(0,0);
 
     physicsObjects.push_back(obj);
 }
@@ -105,7 +131,7 @@ void applyDrag(std::vector<physicsObject>& physicsObjects)
 
 void applyDamping(std::vector<physicsObject>& physicsObjects)
 {
-    for (auto& obj : physicsObjects)
+    for (auto& obj: physicsObjects)
     {
         obj.accelerate(-Vec2(obj.velocity.x * damping, obj.velocity.y * damping));
     }
@@ -179,11 +205,8 @@ void physicsProcess(std::vector<physicsObject>& physicsObjects, float dt)
     }
 }
 
-GLuint textureID;
-
 void render()
 {
-    glBindTexture(GL_TEXTURE_2D, textureID);
     for (physicsObject& obj : physicsObjects)
     {
         // Pixel coordinates for the square
@@ -200,14 +223,13 @@ void render()
         float top = 1.0f - 2.0f * centerY / windowHeight;
         float bottom = 1.0f - 2.0f * (centerY + squareSize) / windowHeight;
 
-        glBegin(GL_QUADS);
-            glTexCoord2f(0.0f, 0.0f); glVertex2f(left, top);
-            glTexCoord2f(1.0f, 0.0f); glVertex2f(right, top);
-            glTexCoord2f(1.0f, 1.0f); glVertex2f(right, bottom);
-            glTexCoord2f(0.0f, 1.0f); glVertex2f(left, bottom);
+        glBegin(GL_POLYGON);
+            glVertex2f(left, top);
+            glVertex2f(right, top);
+            glVertex2f(right, bottom);
+            glVertex2f(left, bottom);
         glEnd();
     }
-    glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 static void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
@@ -238,7 +260,8 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
         isSpacePressed = false;
 }
 
-int main()
+
+int main(int argc, char* argv[])
 {
     // Initialize GLFW
     if (!glfwInit())
@@ -247,82 +270,96 @@ int main()
         return -1;
     }
 
-    // Create a GLFWwindow object
-    GLFWwindow* window = glfwCreateWindow(windowWidth, windowHeight, "Physics Simulation", NULL, NULL);
+    #ifdef __APPLE__
+        glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // For MacOS
+    #endif
+
+    // Create a windowed mode window and its OpenGL context
+    GLFWwindow* window = glfwCreateWindow(windowWidth, windowHeight, "GLFW OpenGL Game", nullptr, nullptr);
     if (!window)
     {
         std::cerr << "Failed to create GLFW window" << std::endl;
         glfwTerminate();
         return -1;
     }
+
+    // Make the window's context current
     glfwMakeContextCurrent(window);
 
     // Initialize GLEW
-    glewExperimental = GL_TRUE;
+    glewExperimental = true; // Needed for core profile
     if (glewInit() != GLEW_OK)
     {
         std::cerr << "Failed to initialize GLEW" << std::endl;
         return -1;
     }
+    
+    if (SDL_Init(SDL_INIT_AUDIO) < 0) {
+        std::cerr << "Failed to initialize SDL: " << SDL_GetError() << std::endl;
+        return -1;
+    }
 
-    // Set the required callback functions
+    SDL_AudioSpec desiredSpec;
+    SDL_AudioSpec obtainedSpec;
+
+    SDL_memset(&desiredSpec, 0, sizeof(desiredSpec));
+    desiredSpec.freq = SAMPLE_RATE;
+    desiredSpec.format = AUDIO_S16SYS;
+    desiredSpec.channels = 1;
+    desiredSpec.samples = 4096;
+    desiredSpec.callback = audio_callback;
+
+    if (SDL_OpenAudio(&desiredSpec, &obtainedSpec) < 0) {
+        std::cerr << "Failed to open audio: " << SDL_GetError() << std::endl;
+        SDL_Quit();
+        return -1;
+    }
+
+    SDL_PauseAudio(0); // Start playing audio
+
+    glViewport(0, 0, windowWidth, windowHeight);
+
+    // Callbacks
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     glfwSetCursorPosCallback(window, cursor_position_callback);
     glfwSetMouseButtonCallback(window, mouse_button_callback);
     glfwSetKeyCallback(window, key_callback);
 
-    // Load texture using SFML
-    sf::Texture texture;
-    if (!texture.loadFromFile("./texture.png"))
-    {
-        std::cerr << "Failed to load texture" << std::endl;
-        return -1;
-    }
 
-    // Create OpenGL texture from SFML texture
-    glGenTextures(1, &textureID);
-    glBindTexture(GL_TEXTURE_2D, textureID);
-
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, texture.getSize().x, texture.getSize().y, 0, GL_RGBA, GL_UNSIGNED_BYTE, texture.copyToImage().getPixelsPtr());
-
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glBindTexture(GL_TEXTURE_2D, 0);
-
-    // Main loop
     while (!glfwWindowShouldClose(window))
     {
-        // Input
         processInput(window);
 
-        // Clear the colorbuffer
+        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        // Render
+        float dt = 0.016f;
+        physicsProcess(physicsObjects,dt);
         render();
 
-        // Swap the screen buffers
-        glfwSwapBuffers(window);
+        // Debug checks
+        // std::cout << "Cursor Position: (" << xpos << ", " << ypos << ")" << std::endl;
+        // std::cout << "isMouseHeld: " << isMouseHeld << std::endl;
 
-        // Poll for and process events
+        glfwSwapBuffers(window);
         glfwPollEvents();
     }
-
-    // Terminate GLFW
+    SDL_CloseAudio();
+    SDL_Quit();
     glfwTerminate();
     return 0;
 }
 
-void framebuffer_size_callback(GLFWwindow* window, int width, int height)
-{
-    glViewport(0, 0, width, height);
-    windowWidth = width;
-    windowHeight = height;
-}
-
+// Function to process input
 void processInput(GLFWwindow* window)
 {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
 }
 
+
+// Callback function to adjust the viewport size when the window size changes
+void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+{
+    glViewport(0, 0, width, height);
+}
