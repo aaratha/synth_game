@@ -8,9 +8,6 @@
 #include "render.h"
 #include "constants.h"
 
-// build command:
-//     c++ engine main.cpp audio.cpp input.cpp render.cpp physics.cpp -lGLEW -lglfw -lSDL2 -lSFML -lGL
-
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow* window);
 
@@ -35,6 +32,7 @@ int main()
     }
 
     glfwMakeContextCurrent(window);
+
     glewExperimental = true;
     if (glewInit() != GLEW_OK)
     {
@@ -42,32 +40,11 @@ int main()
         return -1;
     }
 
-    if (SDL_Init(SDL_INIT_AUDIO) < 0)
-    {
-        std::cerr << "Failed to initialize SDL: " << SDL_GetError() << std::endl;
-        return -1;
-    }
+    AudioData audioData = { 440.0, 28000, SDL_CreateMutex() };
+    startAudioStream(&audioData);
 
-    SDL_AudioSpec desiredSpec;
-    SDL_AudioSpec obtainedSpec;
-
-    SDL_memset(&desiredSpec, 0, sizeof(desiredSpec));
-    desiredSpec.freq = SAMPLE_RATE;
-    desiredSpec.format = AUDIO_S16SYS;
-    desiredSpec.channels = 1;
-    desiredSpec.samples = 4096;
-    desiredSpec.callback = audio_callback;
-
-    if (SDL_OpenAudio(&desiredSpec, &obtainedSpec) < 0)
-    {
-        std::cerr << "Failed to open audio: " << SDL_GetError() << std::endl;
-        SDL_Quit();
-        return -1;
-    }
-
-    SDL_PauseAudio(0);
     glViewport(0, 0, windowWidth, windowHeight);
-
+    
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     glfwSetCursorPosCallback(window, cursor_position_callback);
     glfwSetMouseButtonCallback(window, mouse_button_callback);
@@ -75,9 +52,11 @@ int main()
 
     initRender();
 
+    double newFrequency = 440.0;
     while (!glfwWindowShouldClose(window))
     {
         processInput(window);
+
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
@@ -87,9 +66,15 @@ int main()
 
         glfwSwapBuffers(window);
         glfwPollEvents();
+
+        // Update frequency dynamically for demonstration purposes
+        for (auto& Module : Modules)
+            newFrequency = Module.position_current.x;
+        setFrequency(&audioData, newFrequency);
     }
 
     SDL_CloseAudio();
+    SDL_DestroyMutex(audioData.mutex);
     SDL_Quit();
     glfwTerminate();
     return 0;

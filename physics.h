@@ -25,6 +25,11 @@ struct Module : public physicsObject
     int amplitude;
     double phase;
 
+    float in;
+    float out;
+
+    float modifier;
+
     Module(int freq, int amp);
     void generateSound(double dt);
 };

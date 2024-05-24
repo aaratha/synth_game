@@ -52,7 +52,9 @@ void instantiate(double x, double y)
     obj.position_current = Vec2(x, y);
     obj.position_old = Vec2(x, y);
     obj.acceleration = Vec2(0, 0);
+    obj.phase = 0.0;
 
+    printf("Instantiating module at position (%f, %f)\n", x, y);
     Modules.push_back(obj);
 }
 
