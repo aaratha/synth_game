@@ -69,7 +69,6 @@ int main()
 
         // Update frequency dynamically for demonstration purposes
         for (auto& Module : Modules)
-            Module.in = frequency;
             frequency = Module.position_current.x;
         setFrequency(&audioData, frequency);
     }

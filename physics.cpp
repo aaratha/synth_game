@@ -23,15 +23,8 @@ Vec2 normalize(const Vec2& vector)
     return vector;
 }
 
-Module::Module(int freq, int amp) : frequency(freq), amplitude(amp), phase(0.0) {}
+Module::Module(int freq, int amp) : amplitude(amp), phase(0.0) {}
 
-void Module::generateSound(double dt)
-{
-    double phaseIncrement = 2.0 * M_PI * frequency / SAMPLE_RATE;
-    phase += phaseIncrement * dt;
-    if (phase >= 2.0 * M_PI)
-        phase -= 2.0 * M_PI;
-}
 
 void physicsObject::updatePosition(float dt)
 {
