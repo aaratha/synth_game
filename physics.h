@@ -21,7 +21,6 @@ struct physicsObject
 
 struct Module : public physicsObject
 {
-    int frequency;
     int amplitude;
     double phase;
 

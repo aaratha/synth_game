@@ -52,7 +52,7 @@ int main()
 
     initRender();
 
-    double newFrequency = 440.0;
+    double frequency = 440.0;
     while (!glfwWindowShouldClose(window))
     {
         processInput(window);
@@ -69,8 +69,9 @@ int main()
 
         // Update frequency dynamically for demonstration purposes
         for (auto& Module : Modules)
-            newFrequency = Module.position_current.x;
-        setFrequency(&audioData, newFrequency);
+            Module.in = frequency;
+            frequency = Module.position_current.x;
+        setFrequency(&audioData, frequency);
     }
 
     SDL_CloseAudio();
