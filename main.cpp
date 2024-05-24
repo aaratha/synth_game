@@ -8,6 +8,9 @@
 #include "render.h"
 #include "constants.h"
 
+// build command:
+//     c++ engine main.cpp audio.cpp input.cpp render.cpp physics.cpp -lGLEW -lglfw -lSDL2 -lSFML -lGL
+
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow* window);
 
