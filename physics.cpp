@@ -1,5 +1,6 @@
 #include "physics.h"
 #include "constants.h"
+#include "render.h"
 #include <cmath>
 #include <vector>
 
@@ -8,7 +9,7 @@ int deadZone = 30;
 bool isMouseHeld = false;
 bool isSpacePressed = false;
 double dragForce = 4000;
-double damping = 200;
+double damping = 400;
 std::vector<Module> Modules;
 int selectedObject = -1;
 
