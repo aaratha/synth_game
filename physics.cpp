@@ -126,6 +126,7 @@ void solveCollisions(std::vector<Module>& Modules)
     }
 }
 
+
 void physicsObject::updatePosition(float dt)
 {
     velocity = position_current - position_old;
@@ -133,6 +134,7 @@ void physicsObject::updatePosition(float dt)
     position_current = position_current + velocity + acceleration * dt * dt;
     acceleration = {};
 }
+
 
 void physicsObject::accelerate(Vec2 acc)
 {
@@ -153,4 +155,3 @@ void physicsProcess(std::vector<Module>& Modules, AudioData* audioData, float dt
         solveCollisions(Modules);
     }
 }
-

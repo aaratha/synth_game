@@ -27,6 +27,6 @@ void Module::updateFrequency(AudioData* audioData)
 
 void Module::updateClock(float elapsedTime, AudioData* audioData)
 {
-    out = in * sin(elapsedTime);
+    out = in * (1 + 0.5 * sin(elapsedTime));
     updateFrequency(audioData);
 }
