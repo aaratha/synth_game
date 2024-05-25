@@ -45,8 +45,6 @@ int main()
 
     startAudioStream(&audioData);
 
-    instantiate(100.0, 100.0, &audioData); // Correctly pass the audioData pointer
-
     glViewport(0, 0, windowWidth, windowHeight);
 
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
@@ -79,8 +77,6 @@ int main()
             module.out = module.in; // For this example, directly map input to output
             module.updateFrequency(&audioData);
         }
-
-        SDL_Delay(100); // Add delay to slow down frequency updates
     }
 
     SDL_CloseAudio();
