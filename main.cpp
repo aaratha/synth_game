@@ -71,10 +71,8 @@ int main()
         // Example of updating the frequency dynamically
         for (auto& module : Modules)
         {
-            module.in += 1.0f;
             if (module.in > 880.0f)
                 module.in = 440.0f;
-            module.out = module.in; // For this example, directly map input to output
             module.updateFrequency(&audioData);
         }
     }

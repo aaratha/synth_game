@@ -47,7 +47,8 @@ void inToOut(std::vector<Module>& Modules, AudioData* audioData)
 {
     for (auto& obj : Modules)
     {
-        obj.out = obj.in * obj.modifier;
+        // obj.out = obj.in * obj.modifier;
+        obj.out = obj.position_current.x;
         obj.updateFrequency(audioData);
     }
 }
