@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include "audio.h"
 
 using Vec2 = sf::Vector2f;
 
@@ -29,8 +30,10 @@ struct Module : public physicsObject
 
     float modifier;
 
-    Module(int freq, int amp);
+    Module(int freq, int amp, AudioData* audioData);
+
     void generateSound(double dt);
+    void updateFrequency(AudioData* audioData);
 };
 
 extern std::vector<Module> Modules;
@@ -38,12 +41,13 @@ extern double xpos, ypos;
 extern bool isMouseHeld;
 extern int selectedObject;
 
-void instantiate(double x, double y);
+void instantiate(double x, double y, AudioData* audioData);
 void updatePositions(std::vector<Module>& Modules, float dt);
 void applyDrag(std::vector<Module>& Modules);
 void applyDamping(std::vector<Module>& Modules);
 void solveCollisions(std::vector<Module>& Modules);
-void physicsProcess(std::vector<Module>& Modules, float dt);
+void physicsProcess(std::vector<Module>& Modules, AudioData* audioData, float dt);
+void inToOut(std::vector<Module>& Modules, AudioData* audioData);
 
 #endif // PHYSICS_H
 

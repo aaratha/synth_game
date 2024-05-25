@@ -4,12 +4,14 @@
 #include <GLFW/glfw3.h>
 #include <vector>
 #include "physics.h"
+#include "audio.h"
 
 extern double xpos, ypos;
 extern bool isMouseHeld;
 extern bool isSpacePressed;
 extern int selectedObject;
 extern std::vector<Module> Modules;
+extern AudioData audioData; // Add the audioData declaration
 
 void cursor_position_callback(GLFWwindow* window, double xpos, double ypos);
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);

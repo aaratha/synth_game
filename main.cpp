@@ -8,6 +8,9 @@
 #include "render.h"
 #include "constants.h"
 
+// Declare audioData globally
+AudioData audioData = { 440.0, 28000, SDL_CreateMutex() };
+
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow* window);
 
@@ -40,11 +43,12 @@ int main()
         return -1;
     }
 
-    AudioData audioData = { 440.0, 28000, SDL_CreateMutex() };
     startAudioStream(&audioData);
 
+    instantiate(100.0, 100.0, &audioData); // Correctly pass the audioData pointer
+
     glViewport(0, 0, windowWidth, windowHeight);
-    
+
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     glfwSetCursorPosCallback(window, cursor_position_callback);
     glfwSetMouseButtonCallback(window, mouse_button_callback);
@@ -52,7 +56,6 @@ int main()
 
     initRender();
 
-    double frequency = 440.0;
     while (!glfwWindowShouldClose(window))
     {
         processInput(window);
@@ -61,16 +64,23 @@ int main()
         glClear(GL_COLOR_BUFFER_BIT);
 
         float dt = 0.016f;
-        physicsProcess(Modules, dt);
+        physicsProcess(Modules, &audioData, dt); // Correctly pass the audioData pointer and dt
         render(Modules, windowWidth, windowHeight, squareSize);
 
         glfwSwapBuffers(window);
         glfwPollEvents();
 
-        // Update frequency dynamically for demonstration purposes
-        for (auto& Module : Modules)
-            frequency = Module.position_current.x;
-        setFrequency(&audioData, frequency);
+        // Example of updating the frequency dynamically
+        for (auto& module : Modules)
+        {
+            module.in += 1.0f;
+            if (module.in > 880.0f)
+                module.in = 440.0f;
+            module.out = module.in; // For this example, directly map input to output
+            module.updateFrequency(&audioData);
+        }
+
+        SDL_Delay(100); // Add delay to slow down frequency updates
     }
 
     SDL_CloseAudio();

@@ -1,8 +1,10 @@
 #include "physics.h"
+#include "audio.h"
 #include "constants.h"
 #include "render.h"
 #include <cmath>
 #include <vector>
+#include <iostream>
 
 double xpos, ypos;
 int deadZone = 30;
@@ -23,8 +25,32 @@ Vec2 normalize(const Vec2& vector)
     return vector;
 }
 
-Module::Module(int freq, int amp) : amplitude(amp), phase(0.0) {}
+Module::Module(int freq, int amp, AudioData* audioData) : amplitude(amp), phase(0.0), in(0.0f), out(0.0f), modifier(1.0f) 
+{
+    updateFrequency(audioData);
+}
 
+void Module::generateSound(double dt)
+{
+    double phaseIncrement = 2.0 * M_PI * 440.0 / SAMPLE_RATE; // Fixed frequency for tone generation
+    phase += phaseIncrement * dt;
+    if (phase >= 2.0 * M_PI)
+        phase -= 2.0 * M_PI;
+}
+
+void Module::updateFrequency(AudioData* audioData)
+{
+    setFrequency(audioData, out);
+}
+
+void inToOut(std::vector<Module>& Modules, AudioData* audioData)
+{
+    for (auto& obj : Modules)
+    {
+        obj.out = obj.in * obj.modifier;
+        obj.updateFrequency(audioData);
+    }
+}
 
 void physicsObject::updatePosition(float dt)
 {
@@ -39,15 +65,16 @@ void physicsObject::accelerate(Vec2 acc)
     acceleration += acc;
 }
 
-void instantiate(double x, double y)
+void instantiate(double x, double y, AudioData* audioData)
 {
-    Module obj(440, 28000);
+    Module obj(440, 28000, audioData);
     obj.position_current = Vec2(x, y);
     obj.position_old = Vec2(x, y);
     obj.acceleration = Vec2(0, 0);
     obj.phase = 0.0;
+    obj.in = 440.0f; // Example input frequency
 
-    printf("Instantiating module at position (%f, %f)\n", x, y);
+    std::cout << "Instantiating module at position (" << x << ", " << y << ")" << std::endl;
     Modules.push_back(obj);
 }
 
@@ -138,7 +165,7 @@ void solveCollisions(std::vector<Module>& Modules)
     }
 }
 
-void physicsProcess(std::vector<Module>& Modules, float dt)
+void physicsProcess(std::vector<Module>& Modules, AudioData* audioData, float dt)
 {
     const int sub_steps = 2;
     const float sub_dt = dt / sub_steps;
@@ -149,6 +176,7 @@ void physicsProcess(std::vector<Module>& Modules, float dt)
         applyDrag(Modules);
         applyDamping(Modules);
         solveCollisions(Modules);
+        inToOut(Modules, audioData);
     }
 }
 

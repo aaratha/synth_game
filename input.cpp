@@ -1,6 +1,9 @@
 #include "input.h"
 #include "physics.h"
+#include "audio.h"
 #include <iostream>
+
+extern AudioData audioData; // Ensure this is declared to use in the callback
 
 void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
 {
@@ -24,7 +27,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
     if (key == GLFW_KEY_SPACE && action == GLFW_PRESS)
     {
         isSpacePressed = true;
-        instantiate(xpos, ypos);
+        instantiate(xpos, ypos, &audioData); // Pass the audioData pointer
         std::cout << "space" << std::endl;
     }
     else
