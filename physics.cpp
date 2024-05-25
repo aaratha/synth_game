@@ -139,14 +139,6 @@ void physicsObject::accelerate(Vec2 acc)
     acceleration += acc;
 }
 
-void inToOut(std::vector<Module>& Modules, AudioData* audioData)
-{
-    for (auto& obj : Modules)
-    {
-        obj.out = obj.in * obj.modifier;
-        obj.updateFrequency(audioData);
-    }
-}
 
 void physicsProcess(std::vector<Module>& Modules, AudioData* audioData, float dt)
 {
@@ -159,7 +151,6 @@ void physicsProcess(std::vector<Module>& Modules, AudioData* audioData, float dt
         applyDrag(Modules);
         applyDamping(Modules);
         solveCollisions(Modules);
-        inToOut(Modules, audioData);
     }
 }
 

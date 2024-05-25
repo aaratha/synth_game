@@ -46,9 +46,6 @@ int main()
 
     startAudioStream(&audioData);
 
-    instantiate(100.0, 100.0, &audioData); // Correctly pass the audioData pointer
-
-
     glViewport(0, 0, windowWidth, windowHeight);
 
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
@@ -58,6 +55,8 @@ int main()
 
     initRender();
 
+    float elapsedTime = 0.0f;
+
     while (!glfwWindowShouldClose(window))
     {
         processInput(window);
@@ -66,14 +65,17 @@ int main()
         glClear(GL_COLOR_BUFFER_BIT);
 
         float dt = 0.016f;
+        elapsedTime += dt;
+
+
         physicsProcess(Modules, &audioData, dt); // Correctly pass the audioData pointer and dt
         render(Modules, windowWidth, windowHeight, squareSize);
 
         // Use LFO to modulate the frequency
         if (!Modules.empty())
         {
-            Modules[0].out = Modules[0].position_current.x; // Modulate around 440 Hz with LFO
-            Modules[0].updateFrequency(&audioData);
+            Modules[0].updateClock(elapsedTime, &audioData);
+            Modules[0].generateSound(dt); // Ensure sound generation uses updated frequency
         }
 
         glfwSwapBuffers(window);

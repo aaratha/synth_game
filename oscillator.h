@@ -17,11 +17,11 @@ struct Module : public physicsObject
 
     float modifier;
 
-
     Module(int freq, int amp, AudioData* audioData);
 
     void generateSound(double dt);
     void updateFrequency(AudioData* audioData);
+    void updateClock(float elapsedTime, AudioData* audioData);
 };
 
 #endif // OSCILLATOR_H

@@ -3,8 +3,10 @@
 #include "constants.h"
 #include <cmath>
 
+float elapsedTime = 0.0f;
+
 Module::Module(int freq, int amp, AudioData* audioData)
-    : amplitude(amp), phase(0.0), in(0.0f), out(0.0f), modifier(1.0f)
+    : amplitude(amp), phase(0.0), in(440.0f), out(440.0f), modifier(1.0f)
 {
     updateFrequency(audioData);
 }
@@ -21,4 +23,10 @@ void Module::generateSound(double dt)
 void Module::updateFrequency(AudioData* audioData)
 {
     setFrequency(audioData, out);
+}
+
+void Module::updateClock(float elapsedTime, AudioData* audioData)
+{
+    out = in * sin(elapsedTime);
+    updateFrequency(audioData);
 }
