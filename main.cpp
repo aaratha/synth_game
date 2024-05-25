@@ -7,6 +7,7 @@
 #include "input.h"
 #include "render.h"
 #include "constants.h"
+#include "oscillator.h"
 
 // Declare audioData globally
 AudioData audioData = { 440.0, 28000, SDL_CreateMutex() };
@@ -45,6 +46,9 @@ int main()
 
     startAudioStream(&audioData);
 
+    instantiate(100.0, 100.0, &audioData); // Correctly pass the audioData pointer
+
+
     glViewport(0, 0, windowWidth, windowHeight);
 
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
@@ -65,16 +69,16 @@ int main()
         physicsProcess(Modules, &audioData, dt); // Correctly pass the audioData pointer and dt
         render(Modules, windowWidth, windowHeight, squareSize);
 
+        // Use LFO to modulate the frequency
+        if (!Modules.empty())
+        {
+            Modules[0].out = Modules[0].position_current.x; // Modulate around 440 Hz with LFO
+            Modules[0].updateFrequency(&audioData);
+        }
+
         glfwSwapBuffers(window);
         glfwPollEvents();
 
-        // Example of updating the frequency dynamically
-        for (auto& module : Modules)
-        {
-            if (module.in > 880.0f)
-                module.in = 440.0f;
-            module.updateFrequency(&audioData);
-        }
     }
 
     SDL_CloseAudio();

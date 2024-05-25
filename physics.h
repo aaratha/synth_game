@@ -20,21 +20,8 @@ struct physicsObject
     void accelerate(Vec2 acc);
 };
 
-struct Module : public physicsObject
-{
-    int amplitude;
-    double phase;
-
-    float in;
-    float out;
-
-    float modifier;
-
-    Module(int freq, int amp, AudioData* audioData);
-
-    void generateSound(double dt);
-    void updateFrequency(AudioData* audioData);
-};
+// Forward declaration
+struct Module;
 
 extern std::vector<Module> Modules;
 extern double xpos, ypos;

@@ -1,4 +1,5 @@
 #include "physics.h"
+#include "oscillator.h"
 #include "audio.h"
 #include "constants.h"
 #include "render.h"
@@ -23,47 +24,6 @@ Vec2 normalize(const Vec2& vector)
         return Vec2(vector.x / length, vector.y / length);
     }
     return vector;
-}
-
-Module::Module(int freq, int amp, AudioData* audioData) : amplitude(amp), phase(0.0), in(0.0f), out(0.0f), modifier(1.0f) 
-{
-    updateFrequency(audioData);
-}
-
-void Module::generateSound(double dt)
-{
-    double phaseIncrement = 2.0 * M_PI * 440.0 / SAMPLE_RATE; // Fixed frequency for tone generation
-    phase += phaseIncrement * dt;
-    if (phase >= 2.0 * M_PI)
-        phase -= 2.0 * M_PI;
-}
-
-void Module::updateFrequency(AudioData* audioData)
-{
-    setFrequency(audioData, out);
-}
-
-void inToOut(std::vector<Module>& Modules, AudioData* audioData)
-{
-    for (auto& obj : Modules)
-    {
-        // obj.out = obj.in * obj.modifier;
-        obj.out = obj.position_current.x;
-        obj.updateFrequency(audioData);
-    }
-}
-
-void physicsObject::updatePosition(float dt)
-{
-    velocity = position_current - position_old;
-    position_old = position_current;
-    position_current = position_current + velocity + acceleration * dt * dt;
-    acceleration = {};
-}
-
-void physicsObject::accelerate(Vec2 acc)
-{
-    acceleration += acc;
 }
 
 void instantiate(double x, double y, AudioData* audioData)
@@ -163,6 +123,28 @@ void solveCollisions(std::vector<Module>& Modules)
                 obj2.velocity += impulse;
             }
         }
+    }
+}
+
+void physicsObject::updatePosition(float dt)
+{
+    velocity = position_current - position_old;
+    position_old = position_current;
+    position_current = position_current + velocity + acceleration * dt * dt;
+    acceleration = {};
+}
+
+void physicsObject::accelerate(Vec2 acc)
+{
+    acceleration += acc;
+}
+
+void inToOut(std::vector<Module>& Modules, AudioData* audioData)
+{
+    for (auto& obj : Modules)
+    {
+        obj.out = obj.in * obj.modifier;
+        obj.updateFrequency(audioData);
     }
 }
 
