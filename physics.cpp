@@ -26,6 +26,7 @@ Vec2 normalize(const Vec2& vector)
     return vector;
 }
 
+
 void instantiate(double x, double y, AudioData* audioData)
 {
     Module obj(440, 28000, audioData);
@@ -38,6 +39,21 @@ void instantiate(double x, double y, AudioData* audioData)
     std::cout << "Instantiating module at position (" << x << ", " << y << ")" << std::endl;
     Modules.push_back(obj);
 }
+
+
+void instantiateO(double x, double y, AudioData* audioData)
+{
+    Module obj(440, 28000, audioData);
+    obj.position_current = Vec2(x, y);
+    obj.position_old = Vec2(x, y);
+    obj.acceleration = Vec2(0, 0);
+    obj.phase = 0.0;
+    obj.in = 440.0f; // Example input frequency
+
+    std::cout << "Instantiating module at position (" << x << ", " << y << ")" << std::endl;
+    Modules.push_back(obj);
+}
+
 
 void updatePositions(std::vector<Module>& Modules, float dt)
 {

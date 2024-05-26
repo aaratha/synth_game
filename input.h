@@ -9,6 +9,8 @@
 extern double xpos, ypos;
 extern bool isMouseHeld;
 extern bool isSpacePressed;
+extern bool isOPressed;
+extern bool isSPressed;
 extern int selectedObject;
 extern std::vector<Module> Modules;
 extern AudioData audioData; // Add the audioData declaration

@@ -1,9 +1,11 @@
 #include "input.h"
 #include "physics.h"
 #include "audio.h"
+#include <GLFW/glfw3.h>
 #include <iostream>
 
 extern AudioData audioData; // Ensure this is declared to use in the callback
+bool isOPressed = false;
 
 void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
 {
@@ -30,7 +32,21 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
         instantiate(xpos, ypos, &audioData); // Pass the audioData pointer
         std::cout << "space" << std::endl;
     }
+    else if (key == GLFW_KEY_O && action == GLFW_PRESS)
+    {
+        isOPressed = true;
+        instantiateO(xpos, ypos, &audioData);
+        std::cout << "oscillator" << std::endl;
+    }
+    // else if (key == GLFW_KEY_S && action == GLFW_PRESS)
+    // {
+    //     isSPressed = true;
+    //     instantiateS(xpos, ypos, &audioData);
+    //     std::cout << "sequencer" << std::endl;
+    // }
     else
+    {
         isSpacePressed = false;
+        isOPressed = false;
+    }
 }
-
