@@ -20,8 +20,7 @@ struct Module : public physicsObject
     Module(int freq, int amp, AudioData* audioData);
 
     void generateSound(double dt);
-    void updateFrequency(AudioData* audioData);
-    void updateClock(float elapsedTime, AudioData* audioData);
+    void updateFrequency(AudioData* audioData, float elapsedTime);
 };
 
 #endif // OSCILLATOR_H

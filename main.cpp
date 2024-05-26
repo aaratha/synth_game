@@ -74,7 +74,7 @@ int main()
         // Use LFO to modulate the frequency
         if (!Modules.empty())
         {
-            Modules[0].updateClock(elapsedTime, &audioData);
+            Modules[0].updateFrequency(&audioData, elapsedTime);
             Modules[0].generateSound(dt); // Ensure sound generation uses updated frequency
         }
 
