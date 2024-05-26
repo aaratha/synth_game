@@ -7,13 +7,17 @@
 extern AudioData audioData; // Ensure this is declared to use in the callback
 bool isOPressed = false;
 
-void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
+void cursor_position_callback(GLFWwindow *window, double xpos, double ypos)
 {
-    ::xpos = xpos;
-    ::ypos = ypos;
+    int windowWidth, windowHeight;
+    glfwGetFramebufferSize(window, &windowWidth, &windowHeight);
+
+    // Convert screen coordinates to world coordinates
+    ::xpos = xpos * 2;
+    ::ypos = (ypos * 2) - 0.5 * windowHeight;
 }
 
-void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
+void mouse_button_callback(GLFWwindow *window, int button, int action, int mods)
 {
     if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
         isMouseHeld = true;
@@ -24,7 +28,7 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
     }
 }
 
-void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods)
 {
     if (key == GLFW_KEY_SPACE && action == GLFW_PRESS)
     {
