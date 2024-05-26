@@ -16,6 +16,28 @@ double damping = 400;
 std::vector<Module> Modules;
 int selectedObject = -1;
 
+float elapsedTime = 0.0f;
+
+Module::Module(int freq, int amp, AudioData* audioData)
+    : amplitude(amp), phase(0.0), in(freq), out(freq), modifier(1.0f)
+{
+    updateFrequency(audioData, elapsedTime);
+}
+
+void Module::generateSound(double dt)
+{
+    double frequency = out; // Use the out parameter as the frequency
+    double phaseIncrement = 2.0 * M_PI * frequency / SAMPLE_RATE;
+    phase += phaseIncrement * dt;
+    if (phase >= 2.0 * M_PI)
+        phase -= 2.0 * M_PI;
+}
+
+void Module::updateFrequency(AudioData* audioData, float elapsedTime)
+{
+    // Base implementation, can be empty
+}
+
 Vec2 normalize(const Vec2& vector)
 {
     float length = std::sqrt(vector.x * vector.x + vector.y * vector.y);
@@ -25,7 +47,6 @@ Vec2 normalize(const Vec2& vector)
     }
     return vector;
 }
-
 
 void instantiate(double x, double y, AudioData* audioData)
 {
@@ -40,20 +61,18 @@ void instantiate(double x, double y, AudioData* audioData)
     Modules.push_back(obj);
 }
 
-
 void instantiateO(double x, double y, AudioData* audioData)
 {
-    Module obj(440, 28000, audioData);
+    Oscillator obj(440, 28000, audioData); // Instantiate Oscillator
     obj.position_current = Vec2(x, y);
     obj.position_old = Vec2(x, y);
     obj.acceleration = Vec2(0, 0);
     obj.phase = 0.0;
     obj.in = 440.0f; // Example input frequency
 
-    std::cout << "Instantiating module at position (" << x << ", " << y << ")" << std::endl;
+    std::cout << "Instantiating oscillator at position (" << x << ", " << y << ")" << std::endl;
     Modules.push_back(obj);
 }
-
 
 void updatePositions(std::vector<Module>& Modules, float dt)
 {
@@ -142,7 +161,6 @@ void solveCollisions(std::vector<Module>& Modules)
     }
 }
 
-
 void physicsObject::updatePosition(float dt)
 {
     velocity = position_current - position_old;
@@ -151,12 +169,10 @@ void physicsObject::updatePosition(float dt)
     acceleration = {};
 }
 
-
 void physicsObject::accelerate(Vec2 acc)
 {
     acceleration += acc;
 }
-
 
 void physicsProcess(std::vector<Module>& Modules, AudioData* audioData, float dt)
 {
@@ -171,3 +187,4 @@ void physicsProcess(std::vector<Module>& Modules, AudioData* audioData, float dt
         solveCollisions(Modules);
     }
 }
+

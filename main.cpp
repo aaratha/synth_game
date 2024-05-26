@@ -67,20 +67,17 @@ int main()
         float dt = 0.016f;
         elapsedTime += dt;
 
-
         physicsProcess(Modules, &audioData, dt); // Correctly pass the audioData pointer and dt
         render(Modules, windowWidth, windowHeight, squareSize);
 
         // Use LFO to modulate the frequency
-        if (!Modules.empty())
-        {
-            Modules[0].updateFrequency(&audioData, elapsedTime);
-            Modules[0].generateSound(dt); // Ensure sound generation uses updated frequency
+        for (auto& module : Modules) {
+            module.updateFrequency(&audioData, elapsedTime);
+            module.generateSound(dt); // Ensure sound generation uses updated frequency
         }
 
         glfwSwapBuffers(window);
         glfwPollEvents();
-
     }
 
     SDL_CloseAudio();

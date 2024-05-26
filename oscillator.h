@@ -7,20 +7,11 @@
 
 using Vec2 = sf::Vector2f;
 
-struct Module : public physicsObject
+struct Oscillator : public Module
 {
-    int amplitude;
-    double phase;
+    Oscillator(int freq, int amp, AudioData* audioData) : Module(freq, amp, audioData) {}
 
-    float in;
-    float out;
-
-    float modifier;
-
-    Module(int freq, int amp, AudioData* audioData);
-
-    void generateSound(double dt);
-    void updateFrequency(AudioData* audioData, float elapsedTime);
+    void updateFrequency(AudioData* audioData, float elapsedTime) override; // Ensure override is used
 };
 
 #endif // OSCILLATOR_H
