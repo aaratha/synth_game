@@ -1,5 +1,6 @@
-CMakeFiles/engine.dir/physics.cpp.o: /Users/aaratha/engine/physics.cpp \
-  /Users/aaratha/engine/physics.h \
+CMakeFiles/engine.dir/physics.cpp.o: \
+  /Users/aaratha/synth_game/physics.cpp \
+  /Users/aaratha/synth_game/physics.h \
   /opt/homebrew/include/SFML/Graphics.hpp \
   /opt/homebrew/include/SFML/Window.hpp \
   /opt/homebrew/include/SFML/System.hpp \
@@ -952,7 +953,7 @@ CMakeFiles/engine.dir/physics.cpp.o: /Users/aaratha/engine/physics.cpp \
   /opt/homebrew/include/SFML/Graphics/Sprite.hpp \
   /opt/homebrew/include/SFML/Graphics/Text.hpp \
   /opt/homebrew/include/SFML/Graphics/VertexBuffer.hpp \
-  /Users/aaratha/engine/audio.h /opt/homebrew/include/SDL2/SDL.h \
+  /Users/aaratha/synth_game/audio.h /opt/homebrew/include/SDL2/SDL.h \
   /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_main.h \
   /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_stdinc.h \
   /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_config.h \
@@ -1012,8 +1013,9 @@ CMakeFiles/engine.dir/physics.cpp.o: /Users/aaratha/engine/physics.cpp \
   /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_version.h \
   /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_locale.h \
   /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_misc.h \
-  /Users/aaratha/engine/oscillator.h /Users/aaratha/engine/constants.h \
-  /Users/aaratha/engine/render.h /opt/homebrew/include/GL/glew.h \
+  /Users/aaratha/synth_game/oscillator.h \
+  /Users/aaratha/synth_game/constants.h \
+  /Users/aaratha/synth_game/render.h /opt/homebrew/include/GL/glew.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/System/Library/Frameworks/OpenGL.framework/Headers/glu.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/System/Library/Frameworks/OpenGL.framework/Headers/OpenGLAvailability.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/os/availability.h \

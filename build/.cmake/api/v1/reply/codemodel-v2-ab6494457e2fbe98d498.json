@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/Users/aaratha/engine/build",
-		"source" : "/Users/aaratha/engine"
+		"build" : "/Users/aaratha/synth_game/build",
+		"source" : "/Users/aaratha/synth_game"
 	},
 	"version" : 
 	{

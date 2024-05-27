@@ -8,12 +8,12 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/Users/aaratha/engine/audio.cpp" "CMakeFiles/engine.dir/audio.cpp.o" "gcc" "CMakeFiles/engine.dir/audio.cpp.o.d"
-  "/Users/aaratha/engine/input.cpp" "CMakeFiles/engine.dir/input.cpp.o" "gcc" "CMakeFiles/engine.dir/input.cpp.o.d"
-  "/Users/aaratha/engine/main.cpp" "CMakeFiles/engine.dir/main.cpp.o" "gcc" "CMakeFiles/engine.dir/main.cpp.o.d"
-  "/Users/aaratha/engine/oscillator.cpp" "CMakeFiles/engine.dir/oscillator.cpp.o" "gcc" "CMakeFiles/engine.dir/oscillator.cpp.o.d"
-  "/Users/aaratha/engine/physics.cpp" "CMakeFiles/engine.dir/physics.cpp.o" "gcc" "CMakeFiles/engine.dir/physics.cpp.o.d"
-  "/Users/aaratha/engine/render.cpp" "CMakeFiles/engine.dir/render.cpp.o" "gcc" "CMakeFiles/engine.dir/render.cpp.o.d"
+  "/Users/aaratha/synth_game/audio.cpp" "CMakeFiles/engine.dir/audio.cpp.o" "gcc" "CMakeFiles/engine.dir/audio.cpp.o.d"
+  "/Users/aaratha/synth_game/input.cpp" "CMakeFiles/engine.dir/input.cpp.o" "gcc" "CMakeFiles/engine.dir/input.cpp.o.d"
+  "/Users/aaratha/synth_game/main.cpp" "CMakeFiles/engine.dir/main.cpp.o" "gcc" "CMakeFiles/engine.dir/main.cpp.o.d"
+  "/Users/aaratha/synth_game/oscillator.cpp" "CMakeFiles/engine.dir/oscillator.cpp.o" "gcc" "CMakeFiles/engine.dir/oscillator.cpp.o.d"
+  "/Users/aaratha/synth_game/physics.cpp" "CMakeFiles/engine.dir/physics.cpp.o" "gcc" "CMakeFiles/engine.dir/physics.cpp.o.d"
+  "/Users/aaratha/synth_game/render.cpp" "CMakeFiles/engine.dir/render.cpp.o" "gcc" "CMakeFiles/engine.dir/render.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

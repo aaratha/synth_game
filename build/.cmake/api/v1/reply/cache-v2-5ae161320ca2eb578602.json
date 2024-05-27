@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/Users/aaratha/engine/build"
+			"value" : "/Users/aaratha/synth_game/build"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -495,7 +495,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/Users/aaratha/engine/build/CMakeFiles/pkgRedirects"
+			"value" : "/Users/aaratha/synth_game/build/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -567,7 +567,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/Users/aaratha/engine"
+			"value" : "/Users/aaratha/synth_game"
 		},
 		{
 			"name" : "CMAKE_INSTALL_NAME_TOOL",
@@ -1351,7 +1351,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/Users/aaratha/engine/build"
+			"value" : "/Users/aaratha/synth_game/build"
 		},
 		{
 			"name" : "engine_IS_TOP_LEVEL",
@@ -1375,7 +1375,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/Users/aaratha/engine"
+			"value" : "/Users/aaratha/synth_game"
 		}
 	],
 	"kind" : "cache",

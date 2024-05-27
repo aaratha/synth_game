@@ -1,4 +1,4 @@
-# Install script for directory: /Users/aaratha/engine
+# Install script for directory: /Users/aaratha/synth_game
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/aaratha/engine/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/aaratha/synth_game/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

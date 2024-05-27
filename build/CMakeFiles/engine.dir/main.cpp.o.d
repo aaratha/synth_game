@@ -1,4 +1,4 @@
-CMakeFiles/engine.dir/main.cpp.o: /Users/aaratha/engine/main.cpp \
+CMakeFiles/engine.dir/main.cpp.o: /Users/aaratha/synth_game/main.cpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/iostream \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__assert \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__config \
@@ -888,7 +888,7 @@ CMakeFiles/engine.dir/main.cpp.o: /Users/aaratha/engine/main.cpp \
   /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_version.h \
   /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_locale.h \
   /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_misc.h \
-  /Users/aaratha/engine/audio.h /Users/aaratha/engine/physics.h \
+  /Users/aaratha/synth_game/audio.h /Users/aaratha/synth_game/physics.h \
   /opt/homebrew/include/SFML/Graphics.hpp \
   /opt/homebrew/include/SFML/Window.hpp \
   /opt/homebrew/include/SFML/System.hpp \
@@ -1019,5 +1019,6 @@ CMakeFiles/engine.dir/main.cpp.o: /Users/aaratha/engine/main.cpp \
   /opt/homebrew/include/SFML/Graphics/Sprite.hpp \
   /opt/homebrew/include/SFML/Graphics/Text.hpp \
   /opt/homebrew/include/SFML/Graphics/VertexBuffer.hpp \
-  /Users/aaratha/engine/input.h /Users/aaratha/engine/render.h \
-  /Users/aaratha/engine/constants.h /Users/aaratha/engine/oscillator.h
+  /Users/aaratha/synth_game/input.h /Users/aaratha/synth_game/render.h \
+  /Users/aaratha/synth_game/constants.h \
+  /Users/aaratha/synth_game/oscillator.h
