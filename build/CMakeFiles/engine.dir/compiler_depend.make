@@ -1783,10 +1783,9 @@ CMakeFiles/engine.dir/input.cpp.o: /Users/aaratha/synth_game/input.cpp \
   /Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include/stdarg.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include/stddef.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include/stdint.h \
-  /Users/aaratha/engine/audio.h \
-  /Users/aaratha/engine/input.cpp \
-  /Users/aaratha/engine/input.h \
-  /Users/aaratha/engine/physics.h \
+  /Users/aaratha/synth_game/audio.h \
+  /Users/aaratha/synth_game/input.h \
+  /Users/aaratha/synth_game/physics.h \
   /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_assert.h \
   /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_atomic.h \
   /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_audio.h \
@@ -3830,11 +3829,10 @@ CMakeFiles/engine.dir/oscillator.cpp.o: /Users/aaratha/synth_game/oscillator.cpp
   /Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include/stdarg.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include/stddef.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include/stdint.h \
-  /Users/aaratha/engine/audio.h \
-  /Users/aaratha/engine/constants.h \
-  /Users/aaratha/engine/oscillator.cpp \
-  /Users/aaratha/engine/oscillator.h \
-  /Users/aaratha/engine/physics.h \
+  /Users/aaratha/synth_game/audio.h \
+  /Users/aaratha/synth_game/constants.h \
+  /Users/aaratha/synth_game/oscillator.h \
+  /Users/aaratha/synth_game/physics.h \
   /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_assert.h \
   /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_atomic.h \
   /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_audio.h \
@@ -6450,21 +6448,15 @@ CMakeFiles/engine.dir/render.cpp.o: /Users/aaratha/synth_game/render.cpp \
 
 /opt/homebrew/include/glm/common.hpp:
 
-/Users/aaratha/synth_game/render.cpp:
-
 /Users/aaratha/engine/oscillator.h:
 
-/Users/aaratha/engine/oscillator.cpp:
+/Users/aaratha/synth_game/render.cpp:
 
 /Users/aaratha/synth_game/oscillator.cpp:
 
 /Users/aaratha/synth_game/render.h:
 
-/Users/aaratha/synth_game/physics.h:
-
 /Users/aaratha/synth_game/constants.h:
-
-/Users/aaratha/synth_game/audio.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/System/Library/Frameworks/OpenGL.framework/Headers/glu.h:
 
@@ -6556,7 +6548,9 @@ CMakeFiles/engine.dir/render.cpp.o: /Users/aaratha/synth_game/render.cpp \
 
 /opt/homebrew/include/GLFW/glfw3.h:
 
-/Users/aaratha/engine/input.cpp:
+/Users/aaratha/synth_game/physics.h:
+
+/Users/aaratha/synth_game/audio.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__split_buffer:
 
@@ -7111,8 +7105,6 @@ CMakeFiles/engine.dir/render.cpp.o: /Users/aaratha/synth_game/render.cpp \
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__memory/allocator_traits.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__type_traits/is_same.h:
-
-/Users/aaratha/engine/input.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__bit/rotate.h:
 

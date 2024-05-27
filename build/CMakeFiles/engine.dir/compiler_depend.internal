@@ -1785,10 +1785,9 @@ CMakeFiles/engine.dir/input.cpp.o
  /Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include/stdarg.h
  /Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include/stddef.h
  /Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include/stdint.h
- /Users/aaratha/engine/audio.h
- /Users/aaratha/engine/input.cpp
- /Users/aaratha/engine/input.h
- /Users/aaratha/engine/physics.h
+ /Users/aaratha/synth_game/audio.h
+ /Users/aaratha/synth_game/input.h
+ /Users/aaratha/synth_game/physics.h
  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_assert.h
  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_atomic.h
  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_audio.h
@@ -3834,11 +3833,10 @@ CMakeFiles/engine.dir/oscillator.cpp.o
  /Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include/stdarg.h
  /Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include/stddef.h
  /Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include/stdint.h
- /Users/aaratha/engine/audio.h
- /Users/aaratha/engine/constants.h
- /Users/aaratha/engine/oscillator.cpp
- /Users/aaratha/engine/oscillator.h
- /Users/aaratha/engine/physics.h
+ /Users/aaratha/synth_game/audio.h
+ /Users/aaratha/synth_game/constants.h
+ /Users/aaratha/synth_game/oscillator.h
+ /Users/aaratha/synth_game/physics.h
  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_assert.h
  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_atomic.h
  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_audio.h

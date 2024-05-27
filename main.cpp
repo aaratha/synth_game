@@ -1,120 +1,106 @@
-#include <iostream>
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
 #include <SDL2/SDL.h>
-#include "audio.h"
-#include "physics.h"
-#include "input.h"
-#include "render.h"
-#include "constants.h"
-#include "oscillator.h"
+#include <iostream>
 
-// mac compile command:
-//     c++ -std=c++11 -o engine main.cpp audio.cpp render.cpp input.cpp oscillator.cpp -I/opt/homebrew/include -L/opt/homebrew/lib -lGL -lGLEW -lSDL2 -lsfml-graphics -lGLFW -lGLM
+const int WINDOW_WIDTH = 800;
+const int WINDOW_HEIGHT = 600;
+const int RECT_WIDTH = 100;
+const int RECT_HEIGHT = 100;
 
-// Declare audioData globally
-AudioData audioData = {440.0, 28000, SDL_CreateMutex()};
-
-void framebuffer_size_callback(GLFWwindow *window, int width, int height);
-void processInput(GLFWwindow *window);
-
-int main()
+int main(int argc, char *argv[])
 {
-    // Get the Retina display scale factor
-    float scaleFactor = 2.0f; //[[NSScreen mainScreen] backingScaleFactor];
-
-    // Adjust the window size
-    int windowWidthScaled = windowWidth * scaleFactor;
-    int windowHeightScaled = windowHeight * scaleFactor;
-
-    // Adjust the viewport dimensions
-
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
-    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-    if (!glfwInit())
+    if (SDL_Init(SDL_INIT_VIDEO) != 0)
     {
-        std::cerr << "Failed to initialize GLFW" << std::endl;
-        return -1;
+        std::cerr << "SDL_Init Error: " << SDL_GetError() << std::endl;
+        return 1;
     }
 
-    // #ifdef __APPLE__
-    //     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-    //     glfwWindowHint(GLFW_OPENGL_COMPAT_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    // #endif
-
-    GLFWwindow *window = glfwCreateWindow(windowWidthScaled, windowHeightScaled, "GLFW OpenGL Game", nullptr, nullptr);
-    // GLFWwindow *window = glfwCreateWindow(windowWidth, windowHeight, "GLFW OpenGL Game", nullptr, nullptr);
-    if (!window)
+    SDL_Window *win = SDL_CreateWindow("SDL2 2D Render", 100, 100, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN);
+    if (win == nullptr)
     {
-        std::cerr << "Failed to create GLFW window" << std::endl;
-        glfwTerminate();
-        return -1;
+        std::cerr << "SDL_CreateWindow Error: " << SDL_GetError() << std::endl;
+        SDL_Quit();
+        return 1;
     }
 
-    glfwMakeContextCurrent(window);
-
-    glewExperimental = true;
-    if (glewInit() != GLEW_OK)
+    SDL_Renderer *ren = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+    if (ren == nullptr)
     {
-        std::cerr << "Failed to initialize GLEW" << std::endl;
-        return -1;
+        std::cerr << "SDL_CreateRenderer Error: " << SDL_GetError() << std::endl;
+        SDL_DestroyWindow(win);
+        SDL_Quit();
+        return 1;
     }
 
-    startAudioStream(&audioData);
+    bool quit = false;
+    SDL_Event e;
 
-    glViewport(0, 0, windowWidthScaled, windowHeightScaled);
-    // glViewport(0, 0, windowWidth, windowHeight);
+    SDL_Rect rect = {WINDOW_WIDTH / 2 - RECT_WIDTH / 2, WINDOW_HEIGHT / 2 - RECT_HEIGHT / 2, RECT_WIDTH, RECT_HEIGHT};
+    bool dragging = false;
+    int offsetX = 0, offsetY = 0;
 
-    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-    glfwSetCursorPosCallback(window, cursor_position_callback);
-    glfwSetMouseButtonCallback(window, mouse_button_callback);
-    glfwSetKeyCallback(window, key_callback);
-
-    initRender();
-
-    float elapsedTime = 0.0f;
-
-    while (!glfwWindowShouldClose(window))
+    while (!quit)
     {
-        processInput(window);
-
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
-
-        float dt = 0.016f;
-        elapsedTime += dt;
-
-        physicsProcess(Modules, &audioData, dt); // Correctly pass the audioData pointer and dt
-        render(Modules, windowWidth, windowHeight, squareSize);
-
-        // Use LFO to modulate the frequency
-        for (auto &module : Modules)
+        while (SDL_PollEvent(&e) != 0)
         {
-            module.updateFrequency(&audioData, elapsedTime);
-            module.generateSound(dt); // Ensure sound generation uses updated frequency
+            if (e.type == SDL_QUIT)
+            {
+                quit = true;
+            }
+            else if (e.type == SDL_MOUSEBUTTONDOWN)
+            {
+                if (e.button.button == SDL_BUTTON_LEFT &&
+                    e.button.x >= rect.x && e.button.x <= rect.x + rect.w &&
+                    e.button.y >= rect.y && e.button.y <= rect.y + rect.h)
+                {
+                    dragging = true;
+                    offsetX = e.button.x - rect.x;
+                    offsetY = e.button.y - rect.y;
+                }
+            }
+            else if (e.type == SDL_MOUSEBUTTONUP)
+            {
+                if (e.button.button == SDL_BUTTON_LEFT)
+                {
+                    dragging = false;
+                    // Snap to grid
+                    rect.x = ((rect.x + RECT_WIDTH / 2) / RECT_WIDTH) * RECT_WIDTH;
+                    rect.y = ((rect.y + RECT_HEIGHT / 2) / RECT_HEIGHT) * RECT_HEIGHT;
+                }
+            }
+            else if (e.type == SDL_MOUSEMOTION)
+            {
+                if (dragging)
+                {
+                    rect.x = e.motion.x - offsetX;
+                    rect.y = e.motion.y - offsetY;
+                }
+            }
         }
 
-        glfwSwapBuffers(window);
-        glfwPollEvents();
+        SDL_SetRenderDrawColor(ren, 0x00, 0x00, 0x00, 0xFF);
+        SDL_RenderClear(ren);
+
+        // Draw grid
+        SDL_SetRenderDrawColor(ren, 0x33, 0x33, 0x33, 0xFF);
+        for (int x = 0; x < WINDOW_WIDTH; x += RECT_WIDTH)
+        {
+            for (int y = 0; y < WINDOW_HEIGHT; y += RECT_HEIGHT)
+            {
+                SDL_Rect gridRect = {x, y, RECT_WIDTH, RECT_HEIGHT};
+                SDL_RenderDrawRect(ren, &gridRect);
+            }
+        }
+
+        // Draw rectangle / 2 / 2
+        SDL_SetRenderDrawColor(ren, 0xFF, 0x00, 0x00, 0xFF);
+        SDL_RenderFillRect(ren, &rect);
+
+        SDL_RenderPresent(ren);
     }
 
-    SDL_CloseAudio();
-    SDL_DestroyMutex(audioData.mutex);
+    SDL_DestroyRenderer(ren);
+    SDL_DestroyWindow(win);
     SDL_Quit();
-    glfwTerminate();
+
     return 0;
-}
-
-void processInput(GLFWwindow *window)
-{
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, true);
-}
-
-void framebuffer_size_callback(GLFWwindow *window, int width, int height)
-{
-    glViewport(0, 0, width, height);
 }

@@ -1,5 +1,5 @@
-CMakeFiles/engine.dir/input.cpp.o: /Users/aaratha/engine/input.cpp \
-  /Users/aaratha/engine/input.h /opt/homebrew/include/GLFW/glfw3.h \
+CMakeFiles/engine.dir/input.cpp.o: /Users/aaratha/synth_game/input.cpp \
+  /Users/aaratha/synth_game/input.h /opt/homebrew/include/GLFW/glfw3.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/stddef.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__config \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__config_site \
@@ -849,7 +849,7 @@ CMakeFiles/engine.dir/input.cpp.o: /Users/aaratha/engine/input.cpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/cstdarg \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__memory/temp_value.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__split_buffer \
-  /Users/aaratha/engine/physics.h \
+  /Users/aaratha/synth_game/physics.h \
   /opt/homebrew/include/SFML/Graphics.hpp \
   /opt/homebrew/include/SFML/Window.hpp \
   /opt/homebrew/include/SFML/System.hpp \
@@ -957,7 +957,7 @@ CMakeFiles/engine.dir/input.cpp.o: /Users/aaratha/engine/input.cpp \
   /opt/homebrew/include/SFML/Graphics/Sprite.hpp \
   /opt/homebrew/include/SFML/Graphics/Text.hpp \
   /opt/homebrew/include/SFML/Graphics/VertexBuffer.hpp \
-  /Users/aaratha/engine/audio.h /opt/homebrew/include/SDL2/SDL.h \
+  /Users/aaratha/synth_game/audio.h /opt/homebrew/include/SDL2/SDL.h \
   /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_main.h \
   /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_stdinc.h \
   /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_config.h \

@@ -1,6 +1,6 @@
 CMakeFiles/engine.dir/oscillator.cpp.o: \
-  /Users/aaratha/engine/oscillator.cpp \
-  /Users/aaratha/engine/oscillator.h \
+  /Users/aaratha/synth_game/oscillator.cpp \
+  /Users/aaratha/synth_game/oscillator.h \
   /opt/homebrew/include/SFML/Graphics.hpp \
   /opt/homebrew/include/SFML/Window.hpp \
   /opt/homebrew/include/SFML/System.hpp \
@@ -953,7 +953,7 @@ CMakeFiles/engine.dir/oscillator.cpp.o: \
   /opt/homebrew/include/SFML/Graphics/Sprite.hpp \
   /opt/homebrew/include/SFML/Graphics/Text.hpp \
   /opt/homebrew/include/SFML/Graphics/VertexBuffer.hpp \
-  /Users/aaratha/engine/audio.h /opt/homebrew/include/SDL2/SDL.h \
+  /Users/aaratha/synth_game/audio.h /opt/homebrew/include/SDL2/SDL.h \
   /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_main.h \
   /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_stdinc.h \
   /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_config.h \
@@ -1013,4 +1013,5 @@ CMakeFiles/engine.dir/oscillator.cpp.o: \
   /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_version.h \
   /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_locale.h \
   /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_misc.h \
-  /Users/aaratha/engine/physics.h /Users/aaratha/engine/constants.h
+  /Users/aaratha/synth_game/physics.h \
+  /Users/aaratha/synth_game/constants.h
