@@ -11,8 +11,7 @@ const int RECT_HEIGHT = 100;
 const int SAMPLE_RATE = 44100;
 const int AMPLITUDE = 28000;
 const float INTERPOLATION_SPEED = 0.3f;
-
-float distance;
+const float EPSILON = 20.0f; // Threshold for snapping to the exact position
 
 // Structure to hold pairs of bottom and target rectangles
 struct RectPair
@@ -20,6 +19,7 @@ struct RectPair
     SDL_Rect bottomRect;
     SDL_Rect targetRect;
     double frequency;
+    double angle; // Angle for rotation
 };
 
 std::vector<RectPair> rectanglePairs;
@@ -46,10 +46,24 @@ void audio_callback(void *userdata, Uint8 *stream, int len)
     }
 }
 
-void updateTargetRectPosition(const SDL_Rect &sourceRect, SDL_Rect &targetRect, float speed)
+void updateTargetRectPosition(RectPair &rectPair, double speed)
 {
-    targetRect.x += static_cast<int>(speed * (sourceRect.x - targetRect.x));
-    targetRect.y += static_cast<int>(speed * (sourceRect.y - targetRect.y));
+    float deltaX = rectPair.bottomRect.x - rectPair.targetRect.x;
+
+    rectPair.targetRect.x = (1 - speed) * rectPair.targetRect.x + speed * rectPair.bottomRect.x;
+    rectPair.targetRect.y = (1 - speed) * rectPair.targetRect.y + speed * rectPair.bottomRect.y;
+    rectPair.angle = deltaX / 5.0;
+}
+
+SDL_Texture *createRectangleTexture(SDL_Renderer *renderer, int width, int height)
+{
+    SDL_Texture *rectTexture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, width, height);
+    SDL_SetTextureBlendMode(rectTexture, SDL_BLENDMODE_BLEND);
+    SDL_SetRenderTarget(renderer, rectTexture);
+    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+    SDL_RenderClear(renderer);
+    SDL_SetRenderTarget(renderer, nullptr);
+    return rectTexture;
 }
 
 int main(int argc, char *argv[])
@@ -76,6 +90,8 @@ int main(int argc, char *argv[])
         SDL_Quit();
         return 1;
     }
+
+    SDL_Texture *rectTexture = createRectangleTexture(ren, RECT_WIDTH, RECT_HEIGHT);
 
     SDL_AudioSpec want, have;
     SDL_memset(&want, 0, sizeof(want));
@@ -137,17 +153,9 @@ int main(int argc, char *argv[])
                     {
                         draggingRectPair->bottomRect.x = ((draggingRectPair->bottomRect.x + RECT_WIDTH / 2) / RECT_WIDTH) * RECT_WIDTH;
                         draggingRectPair->bottomRect.y = ((draggingRectPair->bottomRect.y + RECT_HEIGHT / 2) / RECT_HEIGHT) * RECT_HEIGHT;
-                        draggingRectPair->frequency = 220.0 + (draggingRectPair->bottomRect.y / RECT_HEIGHT) * 20.0;
+                        draggingRectPair->frequency = (220.0 + (draggingRectPair->bottomRect.x / RECT_WIDTH) * 20.0) * (2 * draggingRectPair->bottomRect.y / RECT_HEIGHT);
+
                         draggingRectPair = nullptr;
-                    }
-                    for (RectPair &rectPair : rectanglePairs)
-                    {
-                        distance = sqrt(pow(rectPair.bottomRect.x - rectPair.targetRect.x, 2) + pow(rectPair.bottomRect.y - rectPair.targetRect.y, 2));
-                        if (distance < 100)
-                        {
-                            rectPair.targetRect.x = rectPair.bottomRect.x;
-                            rectPair.targetRect.y = rectPair.bottomRect.y;
-                        }
                     }
                 }
             }
@@ -166,7 +174,7 @@ int main(int argc, char *argv[])
                     SDL_Rect newRect = {e.button.x, e.button.y, RECT_WIDTH, RECT_HEIGHT};
                     SDL_Rect newTargetRect = {newRect.x, newRect.y, RECT_WIDTH, RECT_HEIGHT};
                     double frequency = 220.0 + (newRect.y / RECT_HEIGHT) * 20.0;
-                    rectanglePairs.push_back({newRect, newTargetRect, frequency});
+                    rectanglePairs.push_back({newRect, newTargetRect, frequency, 0.0});
                 }
             }
         }
@@ -174,7 +182,7 @@ int main(int argc, char *argv[])
         // Update the position of each target rectangle using linear interpolation
         for (RectPair &rectPair : rectanglePairs)
         {
-            updateTargetRectPosition(rectPair.bottomRect, rectPair.targetRect, INTERPOLATION_SPEED);
+            updateTargetRectPosition(rectPair, INTERPOLATION_SPEED);
         }
 
         SDL_SetRenderDrawColor(ren, 0x00, 0x00, 0x00, 0xFF);
@@ -190,18 +198,21 @@ int main(int argc, char *argv[])
             }
         }
 
-        // Draw the bottom rectangles
-        SDL_SetRenderDrawColor(ren, 0xFF, 0x00, 0x00, 0xFF);
+        // Draw the bottom rectangles with 50% transparency
+        SDL_SetTextureAlphaMod(rectTexture, 0);
         for (const RectPair &rectPair : rectanglePairs)
         {
-            SDL_RenderFillRect(ren, &rectPair.bottomRect);
+            SDL_RenderCopyEx(ren, rectTexture, NULL, &rectPair.bottomRect, rectPair.angle, NULL, SDL_FLIP_NONE);
         }
 
-        // Draw the target rectangles on top
+        // Reset the alpha modulation to fully opaque
+        SDL_SetTextureAlphaMod(rectTexture, 255);
+
+        // Draw the target rectangles
         SDL_SetRenderDrawColor(ren, 0x00, 0xFF, 0x00, 0xFF);
         for (const RectPair &rectPair : rectanglePairs)
         {
-            SDL_RenderFillRect(ren, &rectPair.targetRect);
+            SDL_RenderCopyEx(ren, rectTexture, NULL, &rectPair.targetRect, rectPair.angle, NULL, SDL_FLIP_NONE);
         }
 
         SDL_RenderPresent(ren);
