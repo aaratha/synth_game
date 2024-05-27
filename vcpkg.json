@@ -1,8 +1,0 @@
-{
-  "dependencies": [
-    "glfw",
-    "sdl2",
-    "sfml",
-    "glew"
-  ]
-}
