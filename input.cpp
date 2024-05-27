@@ -13,8 +13,8 @@ void cursor_position_callback(GLFWwindow *window, double xpos, double ypos)
     glfwGetFramebufferSize(window, &windowWidth, &windowHeight);
 
     // Convert screen coordinates to world coordinates
-    ::xpos = xpos * 2;
-    ::ypos = (ypos * 2) - 0.5 * windowHeight;
+    ::xpos = xpos;
+    ::ypos = ypos;
 }
 
 void mouse_button_callback(GLFWwindow *window, int button, int action, int mods)

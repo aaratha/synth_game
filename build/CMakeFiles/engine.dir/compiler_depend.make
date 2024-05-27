@@ -838,56 +838,56 @@ CMakeFiles/engine.dir/audio.cpp.o: /Users/aaratha/engine/audio.cpp \
   /Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include/stdint.h \
   /Users/aaratha/engine/audio.h \
   /Users/aaratha/engine/constants.h \
-  /opt/homebrew/include/SDL2/SDL.h \
-  /opt/homebrew/include/SDL2/SDL_assert.h \
-  /opt/homebrew/include/SDL2/SDL_atomic.h \
-  /opt/homebrew/include/SDL2/SDL_audio.h \
-  /opt/homebrew/include/SDL2/SDL_blendmode.h \
-  /opt/homebrew/include/SDL2/SDL_clipboard.h \
-  /opt/homebrew/include/SDL2/SDL_config.h \
-  /opt/homebrew/include/SDL2/SDL_cpuinfo.h \
-  /opt/homebrew/include/SDL2/SDL_endian.h \
-  /opt/homebrew/include/SDL2/SDL_error.h \
-  /opt/homebrew/include/SDL2/SDL_events.h \
-  /opt/homebrew/include/SDL2/SDL_filesystem.h \
-  /opt/homebrew/include/SDL2/SDL_gamecontroller.h \
-  /opt/homebrew/include/SDL2/SDL_gesture.h \
-  /opt/homebrew/include/SDL2/SDL_guid.h \
-  /opt/homebrew/include/SDL2/SDL_haptic.h \
-  /opt/homebrew/include/SDL2/SDL_hidapi.h \
-  /opt/homebrew/include/SDL2/SDL_hints.h \
-  /opt/homebrew/include/SDL2/SDL_joystick.h \
-  /opt/homebrew/include/SDL2/SDL_keyboard.h \
-  /opt/homebrew/include/SDL2/SDL_keycode.h \
-  /opt/homebrew/include/SDL2/SDL_loadso.h \
-  /opt/homebrew/include/SDL2/SDL_locale.h \
-  /opt/homebrew/include/SDL2/SDL_log.h \
-  /opt/homebrew/include/SDL2/SDL_main.h \
-  /opt/homebrew/include/SDL2/SDL_messagebox.h \
-  /opt/homebrew/include/SDL2/SDL_metal.h \
-  /opt/homebrew/include/SDL2/SDL_misc.h \
-  /opt/homebrew/include/SDL2/SDL_mouse.h \
-  /opt/homebrew/include/SDL2/SDL_mutex.h \
-  /opt/homebrew/include/SDL2/SDL_pixels.h \
-  /opt/homebrew/include/SDL2/SDL_platform.h \
-  /opt/homebrew/include/SDL2/SDL_power.h \
-  /opt/homebrew/include/SDL2/SDL_quit.h \
-  /opt/homebrew/include/SDL2/SDL_rect.h \
-  /opt/homebrew/include/SDL2/SDL_render.h \
-  /opt/homebrew/include/SDL2/SDL_rwops.h \
-  /opt/homebrew/include/SDL2/SDL_scancode.h \
-  /opt/homebrew/include/SDL2/SDL_sensor.h \
-  /opt/homebrew/include/SDL2/SDL_shape.h \
-  /opt/homebrew/include/SDL2/SDL_stdinc.h \
-  /opt/homebrew/include/SDL2/SDL_surface.h \
-  /opt/homebrew/include/SDL2/SDL_system.h \
-  /opt/homebrew/include/SDL2/SDL_thread.h \
-  /opt/homebrew/include/SDL2/SDL_timer.h \
-  /opt/homebrew/include/SDL2/SDL_touch.h \
-  /opt/homebrew/include/SDL2/SDL_version.h \
-  /opt/homebrew/include/SDL2/SDL_video.h \
-  /opt/homebrew/include/SDL2/begin_code.h \
-  /opt/homebrew/include/SDL2/close_code.h
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_assert.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_atomic.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_audio.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_blendmode.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_clipboard.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_config.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_cpuinfo.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_endian.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_error.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_events.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_filesystem.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_gamecontroller.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_gesture.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_guid.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_haptic.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_hidapi.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_hints.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_joystick.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_keyboard.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_keycode.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_loadso.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_locale.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_log.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_main.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_messagebox.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_metal.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_misc.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_mouse.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_mutex.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_pixels.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_platform.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_power.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_quit.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_rect.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_render.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_rwops.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_scancode.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_sensor.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_shape.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_stdinc.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_surface.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_system.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_thread.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_timer.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_touch.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_version.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_video.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/begin_code.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/close_code.h \
+  /opt/homebrew/include/SDL2/SDL.h
 
 CMakeFiles/engine.dir/input.cpp.o: /Users/aaratha/engine/input.cpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/System/Library/Frameworks/OpenGL.framework/Headers/OpenGLAvailability.h \
@@ -1785,57 +1785,57 @@ CMakeFiles/engine.dir/input.cpp.o: /Users/aaratha/engine/input.cpp \
   /Users/aaratha/engine/audio.h \
   /Users/aaratha/engine/input.h \
   /Users/aaratha/engine/physics.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_assert.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_atomic.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_audio.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_blendmode.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_clipboard.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_config.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_cpuinfo.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_endian.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_error.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_events.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_filesystem.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_gamecontroller.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_gesture.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_guid.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_haptic.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_hidapi.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_hints.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_joystick.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_keyboard.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_keycode.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_loadso.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_locale.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_log.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_main.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_messagebox.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_metal.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_misc.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_mouse.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_mutex.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_pixels.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_platform.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_power.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_quit.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_rect.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_render.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_rwops.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_scancode.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_sensor.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_shape.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_stdinc.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_surface.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_system.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_thread.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_timer.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_touch.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_version.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_video.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/begin_code.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/close_code.h \
   /opt/homebrew/include/GLFW/glfw3.h \
   /opt/homebrew/include/SDL2/SDL.h \
-  /opt/homebrew/include/SDL2/SDL_assert.h \
-  /opt/homebrew/include/SDL2/SDL_atomic.h \
-  /opt/homebrew/include/SDL2/SDL_audio.h \
-  /opt/homebrew/include/SDL2/SDL_blendmode.h \
-  /opt/homebrew/include/SDL2/SDL_clipboard.h \
-  /opt/homebrew/include/SDL2/SDL_config.h \
-  /opt/homebrew/include/SDL2/SDL_cpuinfo.h \
-  /opt/homebrew/include/SDL2/SDL_endian.h \
-  /opt/homebrew/include/SDL2/SDL_error.h \
-  /opt/homebrew/include/SDL2/SDL_events.h \
-  /opt/homebrew/include/SDL2/SDL_filesystem.h \
-  /opt/homebrew/include/SDL2/SDL_gamecontroller.h \
-  /opt/homebrew/include/SDL2/SDL_gesture.h \
-  /opt/homebrew/include/SDL2/SDL_guid.h \
-  /opt/homebrew/include/SDL2/SDL_haptic.h \
-  /opt/homebrew/include/SDL2/SDL_hidapi.h \
-  /opt/homebrew/include/SDL2/SDL_hints.h \
-  /opt/homebrew/include/SDL2/SDL_joystick.h \
-  /opt/homebrew/include/SDL2/SDL_keyboard.h \
-  /opt/homebrew/include/SDL2/SDL_keycode.h \
-  /opt/homebrew/include/SDL2/SDL_loadso.h \
-  /opt/homebrew/include/SDL2/SDL_locale.h \
-  /opt/homebrew/include/SDL2/SDL_log.h \
-  /opt/homebrew/include/SDL2/SDL_main.h \
-  /opt/homebrew/include/SDL2/SDL_messagebox.h \
-  /opt/homebrew/include/SDL2/SDL_metal.h \
-  /opt/homebrew/include/SDL2/SDL_misc.h \
-  /opt/homebrew/include/SDL2/SDL_mouse.h \
-  /opt/homebrew/include/SDL2/SDL_mutex.h \
-  /opt/homebrew/include/SDL2/SDL_pixels.h \
-  /opt/homebrew/include/SDL2/SDL_platform.h \
-  /opt/homebrew/include/SDL2/SDL_power.h \
-  /opt/homebrew/include/SDL2/SDL_quit.h \
-  /opt/homebrew/include/SDL2/SDL_rect.h \
-  /opt/homebrew/include/SDL2/SDL_render.h \
-  /opt/homebrew/include/SDL2/SDL_rwops.h \
-  /opt/homebrew/include/SDL2/SDL_scancode.h \
-  /opt/homebrew/include/SDL2/SDL_sensor.h \
-  /opt/homebrew/include/SDL2/SDL_shape.h \
-  /opt/homebrew/include/SDL2/SDL_stdinc.h \
-  /opt/homebrew/include/SDL2/SDL_surface.h \
-  /opt/homebrew/include/SDL2/SDL_system.h \
-  /opt/homebrew/include/SDL2/SDL_thread.h \
-  /opt/homebrew/include/SDL2/SDL_timer.h \
-  /opt/homebrew/include/SDL2/SDL_touch.h \
-  /opt/homebrew/include/SDL2/SDL_version.h \
-  /opt/homebrew/include/SDL2/SDL_video.h \
-  /opt/homebrew/include/SDL2/begin_code.h \
-  /opt/homebrew/include/SDL2/close_code.h \
   /opt/homebrew/include/SFML/Config.hpp \
   /opt/homebrew/include/SFML/Graphics.hpp \
   /opt/homebrew/include/SFML/Graphics/BlendMode.hpp \
@@ -2812,58 +2812,58 @@ CMakeFiles/engine.dir/main.cpp.o: /Users/aaratha/engine/main.cpp \
   /Users/aaratha/engine/oscillator.h \
   /Users/aaratha/engine/physics.h \
   /Users/aaratha/engine/render.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_assert.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_atomic.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_audio.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_blendmode.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_clipboard.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_config.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_cpuinfo.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_endian.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_error.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_events.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_filesystem.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_gamecontroller.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_gesture.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_guid.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_haptic.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_hidapi.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_hints.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_joystick.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_keyboard.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_keycode.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_loadso.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_locale.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_log.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_main.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_messagebox.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_metal.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_misc.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_mouse.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_mutex.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_pixels.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_platform.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_power.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_quit.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_rect.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_render.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_rwops.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_scancode.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_sensor.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_shape.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_stdinc.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_surface.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_system.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_thread.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_timer.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_touch.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_version.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_video.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/begin_code.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/close_code.h \
   /opt/homebrew/include/GL/glew.h \
   /opt/homebrew/include/GLFW/glfw3.h \
   /opt/homebrew/include/SDL2/SDL.h \
-  /opt/homebrew/include/SDL2/SDL_assert.h \
-  /opt/homebrew/include/SDL2/SDL_atomic.h \
-  /opt/homebrew/include/SDL2/SDL_audio.h \
-  /opt/homebrew/include/SDL2/SDL_blendmode.h \
-  /opt/homebrew/include/SDL2/SDL_clipboard.h \
-  /opt/homebrew/include/SDL2/SDL_config.h \
-  /opt/homebrew/include/SDL2/SDL_cpuinfo.h \
-  /opt/homebrew/include/SDL2/SDL_endian.h \
-  /opt/homebrew/include/SDL2/SDL_error.h \
-  /opt/homebrew/include/SDL2/SDL_events.h \
-  /opt/homebrew/include/SDL2/SDL_filesystem.h \
-  /opt/homebrew/include/SDL2/SDL_gamecontroller.h \
-  /opt/homebrew/include/SDL2/SDL_gesture.h \
-  /opt/homebrew/include/SDL2/SDL_guid.h \
-  /opt/homebrew/include/SDL2/SDL_haptic.h \
-  /opt/homebrew/include/SDL2/SDL_hidapi.h \
-  /opt/homebrew/include/SDL2/SDL_hints.h \
-  /opt/homebrew/include/SDL2/SDL_joystick.h \
-  /opt/homebrew/include/SDL2/SDL_keyboard.h \
-  /opt/homebrew/include/SDL2/SDL_keycode.h \
-  /opt/homebrew/include/SDL2/SDL_loadso.h \
-  /opt/homebrew/include/SDL2/SDL_locale.h \
-  /opt/homebrew/include/SDL2/SDL_log.h \
-  /opt/homebrew/include/SDL2/SDL_main.h \
-  /opt/homebrew/include/SDL2/SDL_messagebox.h \
-  /opt/homebrew/include/SDL2/SDL_metal.h \
-  /opt/homebrew/include/SDL2/SDL_misc.h \
-  /opt/homebrew/include/SDL2/SDL_mouse.h \
-  /opt/homebrew/include/SDL2/SDL_mutex.h \
-  /opt/homebrew/include/SDL2/SDL_pixels.h \
-  /opt/homebrew/include/SDL2/SDL_platform.h \
-  /opt/homebrew/include/SDL2/SDL_power.h \
-  /opt/homebrew/include/SDL2/SDL_quit.h \
-  /opt/homebrew/include/SDL2/SDL_rect.h \
-  /opt/homebrew/include/SDL2/SDL_render.h \
-  /opt/homebrew/include/SDL2/SDL_rwops.h \
-  /opt/homebrew/include/SDL2/SDL_scancode.h \
-  /opt/homebrew/include/SDL2/SDL_sensor.h \
-  /opt/homebrew/include/SDL2/SDL_shape.h \
-  /opt/homebrew/include/SDL2/SDL_stdinc.h \
-  /opt/homebrew/include/SDL2/SDL_surface.h \
-  /opt/homebrew/include/SDL2/SDL_system.h \
-  /opt/homebrew/include/SDL2/SDL_thread.h \
-  /opt/homebrew/include/SDL2/SDL_timer.h \
-  /opt/homebrew/include/SDL2/SDL_touch.h \
-  /opt/homebrew/include/SDL2/SDL_version.h \
-  /opt/homebrew/include/SDL2/SDL_video.h \
-  /opt/homebrew/include/SDL2/begin_code.h \
-  /opt/homebrew/include/SDL2/close_code.h \
   /opt/homebrew/include/SFML/Config.hpp \
   /opt/homebrew/include/SFML/Graphics.hpp \
   /opt/homebrew/include/SFML/Graphics/BlendMode.hpp \
@@ -3832,56 +3832,56 @@ CMakeFiles/engine.dir/oscillator.cpp.o: /Users/aaratha/engine/oscillator.cpp \
   /Users/aaratha/engine/constants.h \
   /Users/aaratha/engine/oscillator.h \
   /Users/aaratha/engine/physics.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_assert.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_atomic.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_audio.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_blendmode.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_clipboard.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_config.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_cpuinfo.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_endian.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_error.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_events.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_filesystem.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_gamecontroller.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_gesture.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_guid.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_haptic.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_hidapi.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_hints.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_joystick.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_keyboard.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_keycode.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_loadso.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_locale.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_log.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_main.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_messagebox.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_metal.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_misc.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_mouse.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_mutex.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_pixels.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_platform.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_power.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_quit.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_rect.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_render.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_rwops.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_scancode.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_sensor.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_shape.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_stdinc.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_surface.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_system.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_thread.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_timer.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_touch.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_version.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_video.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/begin_code.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/close_code.h \
   /opt/homebrew/include/SDL2/SDL.h \
-  /opt/homebrew/include/SDL2/SDL_assert.h \
-  /opt/homebrew/include/SDL2/SDL_atomic.h \
-  /opt/homebrew/include/SDL2/SDL_audio.h \
-  /opt/homebrew/include/SDL2/SDL_blendmode.h \
-  /opt/homebrew/include/SDL2/SDL_clipboard.h \
-  /opt/homebrew/include/SDL2/SDL_config.h \
-  /opt/homebrew/include/SDL2/SDL_cpuinfo.h \
-  /opt/homebrew/include/SDL2/SDL_endian.h \
-  /opt/homebrew/include/SDL2/SDL_error.h \
-  /opt/homebrew/include/SDL2/SDL_events.h \
-  /opt/homebrew/include/SDL2/SDL_filesystem.h \
-  /opt/homebrew/include/SDL2/SDL_gamecontroller.h \
-  /opt/homebrew/include/SDL2/SDL_gesture.h \
-  /opt/homebrew/include/SDL2/SDL_guid.h \
-  /opt/homebrew/include/SDL2/SDL_haptic.h \
-  /opt/homebrew/include/SDL2/SDL_hidapi.h \
-  /opt/homebrew/include/SDL2/SDL_hints.h \
-  /opt/homebrew/include/SDL2/SDL_joystick.h \
-  /opt/homebrew/include/SDL2/SDL_keyboard.h \
-  /opt/homebrew/include/SDL2/SDL_keycode.h \
-  /opt/homebrew/include/SDL2/SDL_loadso.h \
-  /opt/homebrew/include/SDL2/SDL_locale.h \
-  /opt/homebrew/include/SDL2/SDL_log.h \
-  /opt/homebrew/include/SDL2/SDL_main.h \
-  /opt/homebrew/include/SDL2/SDL_messagebox.h \
-  /opt/homebrew/include/SDL2/SDL_metal.h \
-  /opt/homebrew/include/SDL2/SDL_misc.h \
-  /opt/homebrew/include/SDL2/SDL_mouse.h \
-  /opt/homebrew/include/SDL2/SDL_mutex.h \
-  /opt/homebrew/include/SDL2/SDL_pixels.h \
-  /opt/homebrew/include/SDL2/SDL_platform.h \
-  /opt/homebrew/include/SDL2/SDL_power.h \
-  /opt/homebrew/include/SDL2/SDL_quit.h \
-  /opt/homebrew/include/SDL2/SDL_rect.h \
-  /opt/homebrew/include/SDL2/SDL_render.h \
-  /opt/homebrew/include/SDL2/SDL_rwops.h \
-  /opt/homebrew/include/SDL2/SDL_scancode.h \
-  /opt/homebrew/include/SDL2/SDL_sensor.h \
-  /opt/homebrew/include/SDL2/SDL_shape.h \
-  /opt/homebrew/include/SDL2/SDL_stdinc.h \
-  /opt/homebrew/include/SDL2/SDL_surface.h \
-  /opt/homebrew/include/SDL2/SDL_system.h \
-  /opt/homebrew/include/SDL2/SDL_thread.h \
-  /opt/homebrew/include/SDL2/SDL_timer.h \
-  /opt/homebrew/include/SDL2/SDL_touch.h \
-  /opt/homebrew/include/SDL2/SDL_version.h \
-  /opt/homebrew/include/SDL2/SDL_video.h \
-  /opt/homebrew/include/SDL2/begin_code.h \
-  /opt/homebrew/include/SDL2/close_code.h \
   /opt/homebrew/include/SFML/Config.hpp \
   /opt/homebrew/include/SFML/Graphics.hpp \
   /opt/homebrew/include/SFML/Graphics/BlendMode.hpp \
@@ -4857,57 +4857,57 @@ CMakeFiles/engine.dir/physics.cpp.o: /Users/aaratha/engine/physics.cpp \
   /Users/aaratha/engine/oscillator.h \
   /Users/aaratha/engine/physics.h \
   /Users/aaratha/engine/render.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_assert.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_atomic.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_audio.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_blendmode.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_clipboard.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_config.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_cpuinfo.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_endian.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_error.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_events.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_filesystem.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_gamecontroller.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_gesture.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_guid.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_haptic.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_hidapi.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_hints.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_joystick.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_keyboard.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_keycode.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_loadso.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_locale.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_log.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_main.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_messagebox.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_metal.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_misc.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_mouse.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_mutex.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_pixels.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_platform.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_power.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_quit.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_rect.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_render.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_rwops.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_scancode.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_sensor.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_shape.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_stdinc.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_surface.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_system.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_thread.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_timer.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_touch.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_version.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_video.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/begin_code.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/close_code.h \
   /opt/homebrew/include/GL/glew.h \
   /opt/homebrew/include/SDL2/SDL.h \
-  /opt/homebrew/include/SDL2/SDL_assert.h \
-  /opt/homebrew/include/SDL2/SDL_atomic.h \
-  /opt/homebrew/include/SDL2/SDL_audio.h \
-  /opt/homebrew/include/SDL2/SDL_blendmode.h \
-  /opt/homebrew/include/SDL2/SDL_clipboard.h \
-  /opt/homebrew/include/SDL2/SDL_config.h \
-  /opt/homebrew/include/SDL2/SDL_cpuinfo.h \
-  /opt/homebrew/include/SDL2/SDL_endian.h \
-  /opt/homebrew/include/SDL2/SDL_error.h \
-  /opt/homebrew/include/SDL2/SDL_events.h \
-  /opt/homebrew/include/SDL2/SDL_filesystem.h \
-  /opt/homebrew/include/SDL2/SDL_gamecontroller.h \
-  /opt/homebrew/include/SDL2/SDL_gesture.h \
-  /opt/homebrew/include/SDL2/SDL_guid.h \
-  /opt/homebrew/include/SDL2/SDL_haptic.h \
-  /opt/homebrew/include/SDL2/SDL_hidapi.h \
-  /opt/homebrew/include/SDL2/SDL_hints.h \
-  /opt/homebrew/include/SDL2/SDL_joystick.h \
-  /opt/homebrew/include/SDL2/SDL_keyboard.h \
-  /opt/homebrew/include/SDL2/SDL_keycode.h \
-  /opt/homebrew/include/SDL2/SDL_loadso.h \
-  /opt/homebrew/include/SDL2/SDL_locale.h \
-  /opt/homebrew/include/SDL2/SDL_log.h \
-  /opt/homebrew/include/SDL2/SDL_main.h \
-  /opt/homebrew/include/SDL2/SDL_messagebox.h \
-  /opt/homebrew/include/SDL2/SDL_metal.h \
-  /opt/homebrew/include/SDL2/SDL_misc.h \
-  /opt/homebrew/include/SDL2/SDL_mouse.h \
-  /opt/homebrew/include/SDL2/SDL_mutex.h \
-  /opt/homebrew/include/SDL2/SDL_pixels.h \
-  /opt/homebrew/include/SDL2/SDL_platform.h \
-  /opt/homebrew/include/SDL2/SDL_power.h \
-  /opt/homebrew/include/SDL2/SDL_quit.h \
-  /opt/homebrew/include/SDL2/SDL_rect.h \
-  /opt/homebrew/include/SDL2/SDL_render.h \
-  /opt/homebrew/include/SDL2/SDL_rwops.h \
-  /opt/homebrew/include/SDL2/SDL_scancode.h \
-  /opt/homebrew/include/SDL2/SDL_sensor.h \
-  /opt/homebrew/include/SDL2/SDL_shape.h \
-  /opt/homebrew/include/SDL2/SDL_stdinc.h \
-  /opt/homebrew/include/SDL2/SDL_surface.h \
-  /opt/homebrew/include/SDL2/SDL_system.h \
-  /opt/homebrew/include/SDL2/SDL_thread.h \
-  /opt/homebrew/include/SDL2/SDL_timer.h \
-  /opt/homebrew/include/SDL2/SDL_touch.h \
-  /opt/homebrew/include/SDL2/SDL_version.h \
-  /opt/homebrew/include/SDL2/SDL_video.h \
-  /opt/homebrew/include/SDL2/begin_code.h \
-  /opt/homebrew/include/SDL2/close_code.h \
   /opt/homebrew/include/SFML/Config.hpp \
   /opt/homebrew/include/SFML/Graphics.hpp \
   /opt/homebrew/include/SFML/Graphics/BlendMode.hpp \
@@ -5885,58 +5885,58 @@ CMakeFiles/engine.dir/render.cpp.o: /Users/aaratha/engine/render.cpp \
   /Users/aaratha/engine/oscillator.h \
   /Users/aaratha/engine/physics.h \
   /Users/aaratha/engine/render.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_assert.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_atomic.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_audio.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_blendmode.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_clipboard.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_config.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_cpuinfo.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_endian.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_error.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_events.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_filesystem.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_gamecontroller.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_gesture.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_guid.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_haptic.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_hidapi.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_hints.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_joystick.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_keyboard.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_keycode.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_loadso.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_locale.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_log.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_main.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_messagebox.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_metal.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_misc.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_mouse.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_mutex.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_pixels.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_platform.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_power.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_quit.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_rect.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_render.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_rwops.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_scancode.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_sensor.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_shape.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_stdinc.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_surface.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_system.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_thread.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_timer.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_touch.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_version.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_video.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/begin_code.h \
+  /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/close_code.h \
   /opt/homebrew/include/GL/glew.h \
   /opt/homebrew/include/GLFW/glfw3.h \
   /opt/homebrew/include/SDL2/SDL.h \
-  /opt/homebrew/include/SDL2/SDL_assert.h \
-  /opt/homebrew/include/SDL2/SDL_atomic.h \
-  /opt/homebrew/include/SDL2/SDL_audio.h \
-  /opt/homebrew/include/SDL2/SDL_blendmode.h \
-  /opt/homebrew/include/SDL2/SDL_clipboard.h \
-  /opt/homebrew/include/SDL2/SDL_config.h \
-  /opt/homebrew/include/SDL2/SDL_cpuinfo.h \
-  /opt/homebrew/include/SDL2/SDL_endian.h \
-  /opt/homebrew/include/SDL2/SDL_error.h \
-  /opt/homebrew/include/SDL2/SDL_events.h \
-  /opt/homebrew/include/SDL2/SDL_filesystem.h \
-  /opt/homebrew/include/SDL2/SDL_gamecontroller.h \
-  /opt/homebrew/include/SDL2/SDL_gesture.h \
-  /opt/homebrew/include/SDL2/SDL_guid.h \
-  /opt/homebrew/include/SDL2/SDL_haptic.h \
-  /opt/homebrew/include/SDL2/SDL_hidapi.h \
-  /opt/homebrew/include/SDL2/SDL_hints.h \
-  /opt/homebrew/include/SDL2/SDL_joystick.h \
-  /opt/homebrew/include/SDL2/SDL_keyboard.h \
-  /opt/homebrew/include/SDL2/SDL_keycode.h \
-  /opt/homebrew/include/SDL2/SDL_loadso.h \
-  /opt/homebrew/include/SDL2/SDL_locale.h \
-  /opt/homebrew/include/SDL2/SDL_log.h \
-  /opt/homebrew/include/SDL2/SDL_main.h \
-  /opt/homebrew/include/SDL2/SDL_messagebox.h \
-  /opt/homebrew/include/SDL2/SDL_metal.h \
-  /opt/homebrew/include/SDL2/SDL_misc.h \
-  /opt/homebrew/include/SDL2/SDL_mouse.h \
-  /opt/homebrew/include/SDL2/SDL_mutex.h \
-  /opt/homebrew/include/SDL2/SDL_pixels.h \
-  /opt/homebrew/include/SDL2/SDL_platform.h \
-  /opt/homebrew/include/SDL2/SDL_power.h \
-  /opt/homebrew/include/SDL2/SDL_quit.h \
-  /opt/homebrew/include/SDL2/SDL_rect.h \
-  /opt/homebrew/include/SDL2/SDL_render.h \
-  /opt/homebrew/include/SDL2/SDL_rwops.h \
-  /opt/homebrew/include/SDL2/SDL_scancode.h \
-  /opt/homebrew/include/SDL2/SDL_sensor.h \
-  /opt/homebrew/include/SDL2/SDL_shape.h \
-  /opt/homebrew/include/SDL2/SDL_stdinc.h \
-  /opt/homebrew/include/SDL2/SDL_surface.h \
-  /opt/homebrew/include/SDL2/SDL_system.h \
-  /opt/homebrew/include/SDL2/SDL_thread.h \
-  /opt/homebrew/include/SDL2/SDL_timer.h \
-  /opt/homebrew/include/SDL2/SDL_touch.h \
-  /opt/homebrew/include/SDL2/SDL_version.h \
-  /opt/homebrew/include/SDL2/SDL_video.h \
-  /opt/homebrew/include/SDL2/begin_code.h \
-  /opt/homebrew/include/SDL2/close_code.h \
   /opt/homebrew/include/SFML/Config.hpp \
   /opt/homebrew/include/SFML/Graphics.hpp \
   /opt/homebrew/include/SFML/Graphics/BlendMode.hpp \
@@ -6304,8 +6304,6 @@ CMakeFiles/engine.dir/render.cpp.o: /Users/aaratha/engine/render.cpp \
 
 /opt/homebrew/include/glm/ext/quaternion_double_precision.hpp:
 
-/opt/homebrew/include/glm/ext/quaternion_double.hpp:
-
 /opt/homebrew/include/glm/ext/matrix_transform.hpp:
 
 /opt/homebrew/include/glm/ext/matrix_projection.hpp:
@@ -6325,6 +6323,8 @@ CMakeFiles/engine.dir/render.cpp.o: /Users/aaratha/engine/render.cpp \
 /opt/homebrew/include/glm/detail/type_mat4x2.inl:
 
 /opt/homebrew/include/glm/detail/type_mat3x4.inl:
+
+/opt/homebrew/include/glm/detail/type_mat2x4.inl:
 
 /opt/homebrew/include/glm/detail/type_mat2x3.inl:
 
@@ -6380,6 +6380,8 @@ CMakeFiles/engine.dir/render.cpp.o: /Users/aaratha/engine/render.cpp \
 
 /opt/homebrew/include/glm/ext/matrix_float4x2.hpp:
 
+/opt/homebrew/include/glm/ext/matrix_float3x4_precision.hpp:
+
 /opt/homebrew/include/glm/ext/matrix_float3x4.hpp:
 
 /opt/homebrew/include/glm/ext/matrix_float3x3.hpp:
@@ -6406,8 +6408,6 @@ CMakeFiles/engine.dir/render.cpp.o: /Users/aaratha/engine/render.cpp \
 
 /opt/homebrew/include/glm/trigonometric.hpp:
 
-/opt/homebrew/include/glm/matrix.hpp:
-
 /opt/homebrew/include/glm/ext/vector_uint4.hpp:
 
 /opt/homebrew/include/glm/ext/vector_uint3.hpp:
@@ -6424,9 +6424,9 @@ CMakeFiles/engine.dir/render.cpp.o: /Users/aaratha/engine/render.cpp \
 
 /opt/homebrew/include/glm/ext/scalar_constants.hpp:
 
-/opt/homebrew/include/glm/detail/type_quat.hpp:
+/opt/homebrew/include/glm/exponential.hpp:
 
-/opt/homebrew/include/glm/detail/type_mat4x4.hpp:
+/opt/homebrew/include/glm/detail/type_quat.hpp:
 
 /opt/homebrew/include/glm/detail/type_mat4x2.hpp:
 
@@ -6437,6 +6437,10 @@ CMakeFiles/engine.dir/render.cpp.o: /Users/aaratha/engine/render.cpp \
 /opt/homebrew/include/glm/detail/type_vec4.inl:
 
 /opt/homebrew/include/glm/detail/type_mat2x2.hpp:
+
+/opt/homebrew/include/glm/ext/vector_bool4.hpp:
+
+/opt/homebrew/include/glm/detail/qualifier.hpp:
 
 /opt/homebrew/include/glm/common.hpp:
 
@@ -6476,15 +6480,15 @@ CMakeFiles/engine.dir/render.cpp.o: /Users/aaratha/engine/render.cpp \
 
 /opt/homebrew/include/SFML/System/Time.hpp:
 
-/opt/homebrew/include/SFML/System/ThreadLocalPtr.inl:
-
 /opt/homebrew/include/SFML/System/ThreadLocalPtr.hpp:
+
+/opt/homebrew/include/SFML/System/ThreadLocal.hpp:
 
 /opt/homebrew/include/SFML/System/Thread.inl:
 
-/opt/homebrew/include/SFML/System/Thread.hpp:
-
 /opt/homebrew/include/SFML/System/String.hpp:
+
+/opt/homebrew/include/SFML/System/Sleep.hpp:
 
 /opt/homebrew/include/SFML/System/NonCopyable.hpp:
 
@@ -6532,8 +6536,6 @@ CMakeFiles/engine.dir/render.cpp.o: /Users/aaratha/engine/render.cpp \
 
 /opt/homebrew/include/SFML/Graphics/Drawable.hpp:
 
-/opt/homebrew/include/SFML/Graphics/BlendMode.hpp:
-
 /opt/homebrew/include/SFML/Graphics.hpp:
 
 /opt/homebrew/include/SFML/Config.hpp:
@@ -6554,8 +6556,6 @@ CMakeFiles/engine.dir/render.cpp.o: /Users/aaratha/engine/render.cpp \
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__functional/pointer_to_unary_function.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__functional/pointer_to_binary_function.h:
-
 /opt/homebrew/include/glm/ext/vector_int3.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__functional/perfect_forward.h:
@@ -6565,6 +6565,8 @@ CMakeFiles/engine.dir/render.cpp.o: /Users/aaratha/engine/render.cpp \
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__functional/function.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__functional/boyer_moore_searcher.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__functional/binder2nd.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__functional/bind_front.h:
 
@@ -6582,105 +6584,97 @@ CMakeFiles/engine.dir/render.cpp.o: /Users/aaratha/engine/render.cpp \
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__format/format_string.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__format/format_parse_context.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__format/format_error.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__format/concepts.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__format/buffer.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__charconv/to_chars_result.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__charconv/to_chars_base_10.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/System/Library/Frameworks/OpenGL.framework/Headers/gltypes.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/System/Library/Frameworks/OpenGL.framework/Headers/OpenGLAvailability.h:
 
 /Users/aaratha/engine/input.cpp:
 
-/opt/homebrew/include/SDL2/close_code.h:
-
-/opt/homebrew/include/glm/ext/matrix_float3x4_precision.hpp:
-
-/opt/homebrew/include/SDL2/SDL_version.h:
-
-/opt/homebrew/include/SDL2/SDL_timer.h:
-
-/opt/homebrew/include/SDL2/SDL_thread.h:
-
-/opt/homebrew/include/SDL2/SDL_system.h:
-
-/opt/homebrew/include/SFML/System/Sleep.hpp:
-
-/opt/homebrew/include/SDL2/SDL_surface.h:
-
-/opt/homebrew/include/SDL2/SDL_stdinc.h:
-
-/opt/homebrew/include/SDL2/SDL_shape.h:
-
-/opt/homebrew/include/SDL2/SDL_rwops.h:
-
-/opt/homebrew/include/SDL2/SDL_rect.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__functional/binder2nd.h:
-
-/opt/homebrew/include/SDL2/SDL_quit.h:
-
-/opt/homebrew/include/SDL2/SDL_power.h:
-
-/opt/homebrew/include/glm/detail/type_mat2x4.inl:
-
-/opt/homebrew/include/SDL2/SDL_misc.h:
-
-/opt/homebrew/include/glm/exponential.hpp:
-
-/opt/homebrew/include/SDL2/SDL_metal.h:
-
-/opt/homebrew/include/SDL2/SDL_messagebox.h:
-
-/opt/homebrew/include/SDL2/SDL_locale.h:
-
-/opt/homebrew/include/SDL2/SDL_loadso.h:
-
-/opt/homebrew/include/SDL2/SDL_keycode.h:
-
-/opt/homebrew/include/SDL2/SDL_joystick.h:
-
-/opt/homebrew/include/glm/ext/vector_bool4.hpp:
-
-/opt/homebrew/include/glm/detail/qualifier.hpp:
-
-/opt/homebrew/include/SDL2/SDL_hints.h:
-
-/opt/homebrew/include/SDL2/SDL_hidapi.h:
-
-/opt/homebrew/include/SFML/System/ThreadLocal.hpp:
-
-/opt/homebrew/include/SDL2/SDL_guid.h:
-
-/opt/homebrew/include/SDL2/SDL_error.h:
-
-/opt/homebrew/include/SDL2/SDL_scancode.h:
-
-/opt/homebrew/include/SDL2/SDL_endian.h:
-
-/opt/homebrew/include/SDL2/SDL_cpuinfo.h:
-
-/opt/homebrew/include/SDL2/SDL_config.h:
-
-/opt/homebrew/include/SDL2/SDL_log.h:
-
-/opt/homebrew/include/SDL2/SDL_clipboard.h:
-
-/opt/homebrew/include/SDL2/SDL_blendmode.h:
-
-/opt/homebrew/include/SDL2/SDL_audio.h:
-
-/opt/homebrew/include/SDL2/SDL_atomic.h:
-
 /opt/homebrew/include/SDL2/SDL.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__format/format_parse_context.h:
+
+/opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/close_code.h:
+
+/opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_touch.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__charconv/to_chars_result.h:
+
+/opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_timer.h:
+
+/opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_thread.h:
+
+/opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_system.h:
+
+/opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_stdinc.h:
+
+/opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_scancode.h:
+
+/opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_rwops.h:
+
+/opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_power.h:
+
+/opt/homebrew/include/SFML/System/ThreadLocalPtr.inl:
+
+/opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_platform.h:
+
+/opt/homebrew/include/SFML/Graphics/BlendMode.hpp:
+
+/opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_mutex.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__functional/pointer_to_binary_function.h:
+
+/opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_misc.h:
+
+/opt/homebrew/include/glm/detail/type_mat4x4.hpp:
+
+/opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_main.h:
+
+/opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_log.h:
+
+/opt/homebrew/include/glm/matrix.hpp:
+
+/opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_locale.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/System/Library/Frameworks/OpenGL.framework/Headers/gltypes.h:
+
+/opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_loadso.h:
+
+/opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_joystick.h:
+
+/opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_hidapi.h:
+
+/opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_guid.h:
+
+/opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_gesture.h:
+
+/opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_filesystem.h:
+
+/opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_events.h:
+
+/opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_endian.h:
+
+/opt/homebrew/include/glm/ext/quaternion_double.hpp:
+
+/opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_config.h:
+
+/opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_clipboard.h:
+
+/opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_blendmode.h:
+
+/opt/homebrew/include/SFML/System/Thread.hpp:
+
+/opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_audio.h:
+
+/opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_atomic.h:
+
+/opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_assert.h:
 
 /Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include/stdint.h:
 
@@ -6705,6 +6699,8 @@ CMakeFiles/engine.dir/render.cpp.o: /Users/aaratha/engine/render.cpp \
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/xlocale/_ctype.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/wctype.h:
+
+/opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_sensor.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/wchar.h:
 
@@ -6792,8 +6788,6 @@ CMakeFiles/engine.dir/render.cpp.o: /Users/aaratha/engine/render.cpp \
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/_pthread/_pthread_mutex_t.h:
 
-/opt/homebrew/include/SDL2/SDL_haptic.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/_pthread/_pthread_mutexattr_t.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/AvailabilityInternalLegacy.h:
@@ -6836,8 +6830,6 @@ CMakeFiles/engine.dir/render.cpp.o: /Users/aaratha/engine/render.cpp \
 
 /opt/homebrew/include/SFML/Graphics/Image.hpp:
 
-/opt/homebrew/include/SDL2/SDL_pixels.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/wctype.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__algorithm/adjacent_find.h:
@@ -6845,8 +6837,6 @@ CMakeFiles/engine.dir/render.cpp.o: /Users/aaratha/engine/render.cpp \
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__debug_utils/strict_weak_ordering_check.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/string_view:
-
-/opt/homebrew/include/SDL2/SDL_touch.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__algorithm/replace_copy.h:
 
@@ -6918,6 +6908,8 @@ CMakeFiles/engine.dir/render.cpp.o: /Users/aaratha/engine/render.cpp \
 
 /opt/homebrew/include/SFML/System/Utf.inl:
 
+/opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_cpuinfo.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/cstdarg:
 
 /opt/homebrew/include/glm/ext/matrix_float2x4_precision.hpp:
@@ -6959,6 +6951,10 @@ CMakeFiles/engine.dir/render.cpp.o: /Users/aaratha/engine/render.cpp \
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__type_traits/remove_const_ref.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__utility/forward.h:
+
+/opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_render.h:
+
+/opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_hints.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__utility/declval.h:
 
@@ -7035,8 +7031,6 @@ CMakeFiles/engine.dir/render.cpp.o: /Users/aaratha/engine/render.cpp \
 /Users/aaratha/engine/audio.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__type_traits/is_trivially_lexicographically_comparable.h:
-
-/opt/homebrew/include/SDL2/SDL_video.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__type_traits/is_const.h:
 
@@ -7144,8 +7138,6 @@ CMakeFiles/engine.dir/render.cpp.o: /Users/aaratha/engine/render.cpp \
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__type_traits/is_final.h:
 
-/opt/homebrew/include/SDL2/SDL_main.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__type_traits/is_execution_policy.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__type_traits/is_equality_comparable.h:
@@ -7175,8 +7167,6 @@ CMakeFiles/engine.dir/render.cpp.o: /Users/aaratha/engine/render.cpp \
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__iterator/incrementable_traits.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__type_traits/is_convertible.h:
-
-/opt/homebrew/include/SDL2/begin_code.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__type_traits/is_compound.h:
 
@@ -7258,8 +7248,6 @@ CMakeFiles/engine.dir/render.cpp.o: /Users/aaratha/engine/render.cpp \
 
 /opt/homebrew/include/SFML/System/Utf.hpp:
 
-/opt/homebrew/include/SDL2/SDL_events.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__type_traits/copy_cv.h:
 
 /opt/homebrew/include/glm/mat4x2.hpp:
@@ -7281,6 +7269,8 @@ CMakeFiles/engine.dir/render.cpp.o: /Users/aaratha/engine/render.cpp \
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/stdexcept:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/ctime:
+
+/opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_error.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__type_traits/is_core_convertible.h:
 
@@ -7311,8 +7301,6 @@ CMakeFiles/engine.dir/render.cpp.o: /Users/aaratha/engine/render.cpp \
 /opt/homebrew/include/glm/ext/vector_float3_precision.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__tuple/pair_like.h:
-
-/opt/homebrew/include/SDL2/SDL_mutex.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__tuple/make_tuple_types.h:
 
@@ -7383,6 +7371,8 @@ CMakeFiles/engine.dir/render.cpp.o: /Users/aaratha/engine/render.cpp \
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__numeric/reduce.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__numeric/pstl_transform_reduce.h:
+
+/opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/begin_code.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__algorithm/set_difference.h:
 
@@ -7624,8 +7614,6 @@ CMakeFiles/engine.dir/render.cpp.o: /Users/aaratha/engine/render.cpp \
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__type_traits/is_pointer.h:
 
-/opt/homebrew/include/SDL2/SDL_assert.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/_ctermid.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/alloca.h:
@@ -7836,6 +7824,8 @@ CMakeFiles/engine.dir/render.cpp.o: /Users/aaratha/engine/render.cpp \
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__algorithm/ranges_remove.h:
 
+/opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_video.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__bit/bit_ceil.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__algorithm/pstl_copy.h:
@@ -8012,6 +8002,8 @@ CMakeFiles/engine.dir/render.cpp.o: /Users/aaratha/engine/render.cpp \
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__iterator/reverse_access.h:
 
+/opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_mouse.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__algorithm/ranges_stable_partition.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__algorithm/pstl_merge.h:
@@ -8060,7 +8052,11 @@ CMakeFiles/engine.dir/render.cpp.o: /Users/aaratha/engine/render.cpp \
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/type_traits:
 
+/opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_version.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__iterator/move_sentinel.h:
+
+/opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_keyboard.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__algorithm/ranges_set_symmetric_difference.h:
 
@@ -8068,9 +8064,13 @@ CMakeFiles/engine.dir/render.cpp.o: /Users/aaratha/engine/render.cpp \
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__config:
 
+/opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_pixels.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__type_traits/is_member_pointer.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__memory/allocate_at_least.h:
+
+/opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_gamecontroller.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/Availability.h:
 
@@ -8142,6 +8142,8 @@ CMakeFiles/engine.dir/render.cpp.o: /Users/aaratha/engine/render.cpp \
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/initializer_list:
 
+/opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_metal.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__algorithm/ranges_find.h:
 
 /opt/homebrew/include/SFML/Window/Vulkan.hpp:
@@ -8158,6 +8160,8 @@ CMakeFiles/engine.dir/render.cpp.o: /Users/aaratha/engine/render.cpp \
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__algorithm/ranges_lower_bound.h:
 
+/opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_haptic.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__algorithm/ranges_min.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__utility/exchange.h:
@@ -8165,8 +8169,6 @@ CMakeFiles/engine.dir/render.cpp.o: /Users/aaratha/engine/render.cpp \
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/_types/_in_port_t.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__algorithm/pstl_any_all_none_of.h:
-
-/opt/homebrew/include/SDL2/SDL_mouse.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__algorithm/all_of.h:
 
@@ -8224,6 +8226,8 @@ CMakeFiles/engine.dir/render.cpp.o: /Users/aaratha/engine/render.cpp \
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__type_traits/remove_volatile.h:
 
+/opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_surface.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__algorithm/ranges_remove_copy.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__algorithm/half_positive.h:
@@ -8235,6 +8239,8 @@ CMakeFiles/engine.dir/render.cpp.o: /Users/aaratha/engine/render.cpp \
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__algorithm/ranges_count_if.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/_types/_u_int16_t.h:
+
+/opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_rect.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/_stdio.h:
 
@@ -8260,8 +8266,6 @@ CMakeFiles/engine.dir/render.cpp.o: /Users/aaratha/engine/render.cpp \
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__algorithm/any_of.h:
 
-/opt/homebrew/include/SDL2/SDL_render.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__fwd/array.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__iterator/cpp17_iterator_concepts.h:
@@ -8281,8 +8285,6 @@ CMakeFiles/engine.dir/render.cpp.o: /Users/aaratha/engine/render.cpp \
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/_types/_mach_port_t.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__string/extern_template_lists.h:
-
-/opt/homebrew/include/SDL2/SDL_sensor.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__algorithm/pstl_backends/cpu_backends/transform_reduce.h:
 
@@ -8319,6 +8321,8 @@ CMakeFiles/engine.dir/render.cpp.o: /Users/aaratha/engine/render.cpp \
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__algorithm/ranges_adjacent_find.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__type_traits/conditional.h:
+
+/opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_keycode.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__algorithm/is_permutation.h:
 
@@ -8448,8 +8452,6 @@ CMakeFiles/engine.dir/render.cpp.o: /Users/aaratha/engine/render.cpp \
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__type_traits/copy_cvref.h:
 
-/opt/homebrew/include/SDL2/SDL_platform.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__iterator/istreambuf_iterator.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/math.h:
@@ -8481,8 +8483,6 @@ CMakeFiles/engine.dir/render.cpp.o: /Users/aaratha/engine/render.cpp \
 /opt/homebrew/include/glm/detail/type_mat3x2.inl:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__algorithm/pstl_count.h:
-
-/opt/homebrew/include/SDL2/SDL_keyboard.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/ctype.h:
 
@@ -8518,8 +8518,6 @@ CMakeFiles/engine.dir/render.cpp.o: /Users/aaratha/engine/render.cpp \
 
 /opt/homebrew/include/glm/detail/type_mat4x3.inl:
 
-/opt/homebrew/include/SDL2/SDL_filesystem.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/_pthread/_pthread_rwlockattr_t.h:
 
 /opt/homebrew/include/SFML/Window/WindowBase.hpp:
@@ -8529,6 +8527,8 @@ CMakeFiles/engine.dir/render.cpp.o: /Users/aaratha/engine/render.cpp \
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/_types/_int16_t.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__type_traits/is_trivially_move_constructible.h:
+
+/opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_shape.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__type_traits/is_reference_wrapper.h:
 
@@ -8551,6 +8551,8 @@ CMakeFiles/engine.dir/render.cpp.o: /Users/aaratha/engine/render.cpp \
 /opt/homebrew/include/glm/ext/vector_bool2_precision.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__algorithm/max_element.h:
+
+/opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_messagebox.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__algorithm/for_each.h:
 
@@ -8636,8 +8638,6 @@ CMakeFiles/engine.dir/render.cpp.o: /Users/aaratha/engine/render.cpp \
 
 /opt/homebrew/include/glm/ext/vector_double4_precision.hpp:
 
-/opt/homebrew/include/SDL2/SDL_gesture.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__utility/in_place.h:
 
 /opt/homebrew/include/glm/ext/vector_uint1_sized.hpp:
@@ -8652,7 +8652,7 @@ CMakeFiles/engine.dir/render.cpp.o: /Users/aaratha/engine/render.cpp \
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__fwd/pair.h:
 
-/opt/homebrew/include/SDL2/SDL_gamecontroller.h:
+/opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL_quit.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/arm/signal.h:
 

@@ -20,6 +20,15 @@ void processInput(GLFWwindow *window);
 
 int main()
 {
+    // Get the Retina display scale factor
+    float scaleFactor = 2.0f; //[[NSScreen mainScreen] backingScaleFactor];
+
+    // Adjust the window size
+    int windowWidthScaled = windowWidth * scaleFactor;
+    int windowHeightScaled = windowHeight * scaleFactor;
+
+    // Adjust the viewport dimensions
+
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
@@ -36,7 +45,8 @@ int main()
     //     glfwWindowHint(GLFW_OPENGL_COMPAT_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     // #endif
 
-    GLFWwindow *window = glfwCreateWindow(windowWidth, windowHeight, "GLFW OpenGL Game", nullptr, nullptr);
+    GLFWwindow *window = glfwCreateWindow(windowWidthScaled, windowHeightScaled, "GLFW OpenGL Game", nullptr, nullptr);
+    // GLFWwindow *window = glfwCreateWindow(windowWidth, windowHeight, "GLFW OpenGL Game", nullptr, nullptr);
     if (!window)
     {
         std::cerr << "Failed to create GLFW window" << std::endl;
@@ -55,7 +65,8 @@ int main()
 
     startAudioStream(&audioData);
 
-    glViewport(0, 0, windowWidth, windowHeight);
+    glViewport(0, 0, windowWidthScaled, windowHeightScaled);
+    // glViewport(0, 0, windowWidth, windowHeight);
 
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     glfwSetCursorPosCallback(window, cursor_position_callback);

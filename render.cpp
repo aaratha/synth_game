@@ -7,8 +7,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-int windowWidth = 800;
-int windowHeight = 600;
+int windowWidth = 1600;
+int windowHeight = 900;
 
 GLuint VBO, VAO;
 GLuint shaderProgram;

@@ -12,6 +12,7 @@ set(CMAKE_BUILD_TYPE Debug)
 # Include directories
 include_directories(/opt/homebrew/include)
 
+
 # Find packages
 find_package(OpenGL REQUIRED)
 find_package(GLEW REQUIRED)
