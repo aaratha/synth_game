@@ -10,8 +10,8 @@ const int RECT_WIDTH = 100;
 const int RECT_HEIGHT = 100;
 const int SAMPLE_RATE = 44100;
 const int AMPLITUDE = 28000;
-const float INTERPOLATION_SPEED = 0.1f;
-const float EPSILON = 1.0f; // Threshold for snapping to the exact position
+const float INTERPOLATION_SPEED = 0.4f;
+const float EPSILON = 20.0f; // Threshold for snapping to the exact position
 
 // Enum to differentiate between oscillator and output node
 enum NodeType
@@ -63,7 +63,7 @@ void audio_callback(void *userdata, Uint8 *stream, int len)
     }
 }
 
-void updateTargetRectPosition(RectPair &rectPair, double speed)
+void updateTargetRectPosition(RectPair &rectPair, float speed)
 {
     float distX = rectPair.bottomRect.x - rectPair.targetRect.x;
     float distY = rectPair.bottomRect.y - rectPair.targetRect.y;
@@ -78,6 +78,8 @@ void updateTargetRectPosition(RectPair &rectPair, double speed)
         rectPair.targetRect.x += static_cast<int>(speed * distX);
         rectPair.targetRect.y += static_cast<int>(speed * distY);
     }
+
+    rectPair.angle = distX / 5.0; // Update the angle based on the distance
 }
 
 SDL_Texture *createRectangleTexture(SDL_Renderer *renderer, int width, int height, SDL_Color color)
@@ -85,6 +87,16 @@ SDL_Texture *createRectangleTexture(SDL_Renderer *renderer, int width, int heigh
     SDL_Texture *texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, width, height);
     SDL_SetRenderTarget(renderer, texture);
     SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
+    SDL_RenderClear(renderer);
+    SDL_SetRenderTarget(renderer, nullptr);
+    return texture;
+}
+
+SDL_Texture *createTransparentTexture(SDL_Renderer *renderer, int width, int height)
+{
+    SDL_Texture *texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, width, height);
+    SDL_SetRenderTarget(renderer, texture);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0); // Transparent color
     SDL_RenderClear(renderer);
     SDL_SetRenderTarget(renderer, nullptr);
     return texture;
@@ -119,6 +131,7 @@ int main(int argc, char *argv[])
     SDL_Color green = {0, 255, 0, 255};
     SDL_Texture *oscillatorTexture = createRectangleTexture(ren, RECT_WIDTH, RECT_HEIGHT, red);
     SDL_Texture *outputTexture = createRectangleTexture(ren, RECT_WIDTH, RECT_HEIGHT, green);
+    SDL_Texture *transparentTexture = createTransparentTexture(ren, RECT_WIDTH, RECT_HEIGHT);
 
     SDL_AudioSpec want, have;
     SDL_memset(&want, 0, sizeof(want));
@@ -258,21 +271,23 @@ int main(int argc, char *argv[])
 
         for (const RectPair &rectPair : rectanglePairs)
         {
+            SDL_RenderCopy(ren, transparentTexture, nullptr, &rectPair.bottomRect);
+
             if (rectPair.type == OSCILLATOR)
             {
-                SDL_RenderCopy(ren, oscillatorTexture, nullptr, &rectPair.bottomRect);
+                SDL_RenderCopyEx(ren, oscillatorTexture, nullptr, &rectPair.targetRect, rectPair.angle, nullptr, SDL_FLIP_NONE);
             }
             else if (rectPair.type == OUTPUT)
             {
-                SDL_RenderCopy(ren, outputTexture, nullptr, &rectPair.bottomRect);
+                SDL_RenderCopyEx(ren, outputTexture, nullptr, &rectPair.targetRect, rectPair.angle, nullptr, SDL_FLIP_NONE);
             }
 
             if (rectPair.connected && rectPair.connectedTo != nullptr)
             {
                 SDL_SetRenderDrawColor(ren, 255, 255, 255, 255);
                 SDL_RenderDrawLine(ren,
-                                   rectPair.bottomRect.x + RECT_WIDTH / 2, rectPair.bottomRect.y + RECT_HEIGHT / 2,
-                                   rectPair.connectedTo->bottomRect.x + RECT_WIDTH / 2, rectPair.connectedTo->bottomRect.y + RECT_HEIGHT / 2);
+                                   rectPair.targetRect.x + RECT_WIDTH / 2, rectPair.targetRect.y + RECT_HEIGHT / 2,
+                                   rectPair.connectedTo->targetRect.x + RECT_WIDTH / 2, rectPair.connectedTo->targetRect.y + RECT_HEIGHT / 2);
             }
         }
 
@@ -281,6 +296,7 @@ int main(int argc, char *argv[])
 
     SDL_DestroyTexture(oscillatorTexture);
     SDL_DestroyTexture(outputTexture);
+    SDL_DestroyTexture(transparentTexture);
     SDL_CloseAudio();
     SDL_DestroyRenderer(ren);
     SDL_DestroyWindow(win);
