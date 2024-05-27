@@ -10,7 +10,9 @@ const int RECT_WIDTH = 100;
 const int RECT_HEIGHT = 100;
 const int SAMPLE_RATE = 44100;
 const int AMPLITUDE = 28000;
-const float INTERPOLATION_SPEED = 0.1f;
+const float INTERPOLATION_SPEED = 0.3f;
+
+float distance;
 
 // Structure to hold pairs of bottom and target rectangles
 struct RectPair
@@ -137,6 +139,15 @@ int main(int argc, char *argv[])
                         draggingRectPair->bottomRect.y = ((draggingRectPair->bottomRect.y + RECT_HEIGHT / 2) / RECT_HEIGHT) * RECT_HEIGHT;
                         draggingRectPair->frequency = 220.0 + (draggingRectPair->bottomRect.y / RECT_HEIGHT) * 20.0;
                         draggingRectPair = nullptr;
+                    }
+                    for (RectPair &rectPair : rectanglePairs)
+                    {
+                        distance = sqrt(pow(rectPair.bottomRect.x - rectPair.targetRect.x, 2) + pow(rectPair.bottomRect.y - rectPair.targetRect.y, 2));
+                        if (distance < 100)
+                        {
+                            rectPair.targetRect.x = rectPair.bottomRect.x;
+                            rectPair.targetRect.y = rectPair.bottomRect.y;
+                        }
                     }
                 }
             }
