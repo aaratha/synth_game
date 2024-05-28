@@ -12,20 +12,28 @@ const int RECT_HEIGHT = 100;
 const int SAMPLE_RATE = 44100;
 const int AMPLITUDE = 28000;
 const float INTERPOLATION_SPEED = 0.4f;
+const float SCALE_SPEED = 4.0f;
 const float EPSILON = 20.0f; // Threshold for snapping to the exact position
+const float dt = 0.016f;
+
+float elapsedTime = 0.0f;
+float angleOffset = 10.0f;
 
 class Node
 {
 public:
     SDL_Rect bottomRect;
     SDL_Rect targetRect;
-    double angle;
+    double baseAngle;
+    double oscillationAngle;
     double scale;
     bool connected;
+    bool resetting;
+    bool pickedUp;
     Node *connectedTo;
 
     Node(int x, int y)
-        : angle(0), scale(1.0), connected(false), connectedTo(nullptr)
+        : baseAngle(0), oscillationAngle(0), scale(1.0), connected(false), resetting(false), pickedUp(false), connectedTo(nullptr)
     {
         bottomRect = {x, y, RECT_WIDTH, RECT_HEIGHT};
         targetRect = {x, y, RECT_WIDTH, RECT_HEIGHT};
@@ -39,7 +47,6 @@ public:
     {
         float distX = bottomRect.x - targetRect.x;
         float distY = bottomRect.y - targetRect.y;
-        float distance = std::sqrt(distX * distX + distY * distY);
 
         if (std::abs(distX) < EPSILON && std::abs(distY) < EPSILON)
         {
@@ -52,7 +59,39 @@ public:
             targetRect.y += static_cast<int>(speed * distY);
         }
 
-        angle = distX / 5.0; // Update the angle based on the distance
+        baseAngle = distX / 5.0; // Update the base angle based on the distance
+    }
+
+    void pickUpAnimation(float elapsedTime)
+    {
+        if (scale < 1.3f)
+        {
+            scale += SCALE_SPEED * dt;
+        }
+        if (angleOffset > 0.0f)
+        {
+            angleOffset -= 20.0f * dt;
+            oscillationAngle = angleOffset * sin(30 * elapsedTime);
+        }
+    }
+
+    void resetAnimation()
+    {
+        if (scale > 1.0)
+        {
+            scale -= SCALE_SPEED * dt;
+            if (scale < 1.0)
+            {
+                scale = 1.0;
+            }
+        }
+        oscillationAngle = 0.0;
+        angleOffset = 10.0f;
+    }
+
+    double getAngle() const
+    {
+        return baseAngle + oscillationAngle;
     }
 
     void draw(SDL_Renderer *renderer, SDL_Texture *texture)
@@ -62,7 +101,7 @@ public:
             targetRect.y,
             static_cast<int>(RECT_WIDTH * scale),
             static_cast<int>(RECT_HEIGHT * scale)};
-        SDL_RenderCopyEx(renderer, texture, nullptr, &scaledRect, angle, nullptr, SDL_FLIP_NONE);
+        SDL_RenderCopyEx(renderer, texture, nullptr, &scaledRect, getAngle(), nullptr, SDL_FLIP_NONE);
     }
 };
 
@@ -77,6 +116,24 @@ public:
     double process(double inputFrequency) override
     {
         return frequency;
+    }
+};
+
+class LFO : public Node
+{
+public:
+    double frequency;
+    double phase;
+
+    LFO(int x, int y, double freq)
+        : Node(x, y), frequency(freq), phase(0.0) {}
+
+    double process(double inputFrequency) override
+    {
+        phase += frequency / SAMPLE_RATE;
+        if (phase >= 1.0)
+            phase -= 1.0;
+        return inputFrequency + sin(2.0 * M_PI * phase);
     }
 };
 
@@ -172,8 +229,10 @@ int main(int argc, char *argv[])
 
     SDL_Color red = {255, 0, 0, 255};
     SDL_Color green = {0, 255, 0, 255};
+    SDL_Color blue = {0, 0, 255, 255};
     SDL_Texture *oscillatorTexture = createRectangleTexture(ren, RECT_WIDTH, RECT_HEIGHT, red);
     SDL_Texture *outputTexture = createRectangleTexture(ren, RECT_WIDTH, RECT_HEIGHT, green);
+    SDL_Texture *lfoTexture = createRectangleTexture(ren, RECT_WIDTH, RECT_HEIGHT, blue);
     SDL_Texture *transparentTexture = createTransparentTexture(ren, RECT_WIDTH, RECT_HEIGHT);
 
     SDL_AudioSpec want, have;
@@ -203,6 +262,7 @@ int main(int argc, char *argv[])
 
     while (!quit)
     {
+        elapsedTime += dt;
         while (SDL_PollEvent(&e) != 0)
         {
             if (e.type == SDL_QUIT)
@@ -220,9 +280,9 @@ int main(int argc, char *argv[])
                         {
                             dragging = true;
                             draggingNode = node.get();
+                            draggingNode->pickedUp = true;
                             offsetX = e.button.x - node->bottomRect.x;
                             offsetY = e.button.y - node->bottomRect.y;
-                            node->scale = 1.3;
                             break;
                         }
                     }
@@ -262,7 +322,8 @@ int main(int argc, char *argv[])
                     dragging = false;
                     if (draggingNode != nullptr)
                     {
-                        draggingNode->scale = 1.0;
+                        draggingNode->resetting = true;
+                        draggingNode->pickedUp = false;
                         draggingNode->bottomRect.x = ((draggingNode->bottomRect.x + RECT_WIDTH / 2) / RECT_WIDTH) * RECT_WIDTH;
                         draggingNode->bottomRect.y = ((draggingNode->bottomRect.y + RECT_HEIGHT / 2) / RECT_HEIGHT) * RECT_HEIGHT;
                         draggingNode = nullptr;
@@ -286,6 +347,13 @@ int main(int argc, char *argv[])
                     double frequency = 220.0 + (y / RECT_HEIGHT) * 20.0;
                     nodes.push_back(std::unique_ptr<OscillatorNode>(new OscillatorNode(x, y, frequency)));
                 }
+                else if (e.key.keysym.sym == SDLK_l)
+                {
+                    int x = rand() % (WINDOW_WIDTH - RECT_WIDTH);
+                    int y = rand() % (WINDOW_HEIGHT - RECT_HEIGHT);
+                    double frequency = 1.0 + (y / RECT_HEIGHT) * 0.1;
+                    nodes.push_back(std::unique_ptr<LFO>(new LFO(x, y, frequency)));
+                }
                 else if (e.key.keysym.sym == SDLK_SPACE)
                 {
                     int x = rand() % (WINDOW_WIDTH - RECT_WIDTH);
@@ -299,12 +367,24 @@ int main(int argc, char *argv[])
         for (auto &node : nodes)
         {
             node->updatePosition(INTERPOLATION_SPEED);
+            if (node->resetting)
+            {
+                node->resetAnimation();
+                if (node->scale == 1.0)
+                {
+                    node->resetting = false;
+                }
+            }
+            if (node->pickedUp)
+            {
+                node->pickUpAnimation(elapsedTime);
+            }
         }
 
-        SDL_SetRenderDrawColor(ren, 0x00, 0x00, 0x00, 0xFF);
+        SDL_SetRenderDrawColor(ren, 0x00, 0x33, 0x33, 0xFF);
         SDL_RenderClear(ren);
 
-        SDL_SetRenderDrawColor(ren, 0x33, 0x33, 0x33, 0xFF);
+        SDL_SetRenderDrawColor(ren, 0x00, 0x33, 0x33, 0xFF);
         for (int x = 0; x < WINDOW_WIDTH; x += RECT_WIDTH)
         {
             for (int y = 0; y < WINDOW_HEIGHT; y += RECT_HEIGHT)
@@ -326,6 +406,10 @@ int main(int argc, char *argv[])
             {
                 node->draw(ren, outputTexture);
             }
+            else if (dynamic_cast<LFO *>(node.get()))
+            {
+                node->draw(ren, lfoTexture);
+            }
 
             if (node->connected && node->connectedTo != nullptr)
             {
@@ -341,6 +425,7 @@ int main(int argc, char *argv[])
 
     SDL_DestroyTexture(oscillatorTexture);
     SDL_DestroyTexture(outputTexture);
+    SDL_DestroyTexture(lfoTexture);
     SDL_DestroyTexture(transparentTexture);
     SDL_CloseAudio();
     SDL_DestroyRenderer(ren);
