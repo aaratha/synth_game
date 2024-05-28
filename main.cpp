@@ -3,6 +3,7 @@
 #include <vector>
 #include <cmath>
 #include <memory>
+#include <typeinfo>
 
 // Constants
 const int WINDOW_WIDTH = 800;
@@ -41,7 +42,7 @@ public:
 
     virtual ~Node() = default;
 
-    virtual double process(double inputFrequency) = 0;
+    virtual double process(double inputSample) = 0;
 
     void updatePosition(float speed)
     {
@@ -109,13 +110,18 @@ class OscillatorNode : public Node
 {
 public:
     double frequency;
+    double phase;
 
     OscillatorNode(int x, int y, double freq)
-        : Node(x, y), frequency(freq) {}
+        : Node(x, y), frequency(freq), phase(0.0) {}
 
-    double process(double inputFrequency) override
+    double process(double sample) override
     {
-        return frequency;
+        sample = AMPLITUDE * sin(2.0 * M_PI * frequency * phase / SAMPLE_RATE);
+        phase += frequency / SAMPLE_RATE;
+        if (phase >= 1.0)
+            phase -= 1.0;
+        return sample;
     }
 };
 
@@ -128,12 +134,14 @@ public:
     LFO(int x, int y, double freq)
         : Node(x, y), frequency(freq), phase(0.0) {}
 
-    double process(double inputFrequency) override
+    double process(double sample) override
     {
         phase += frequency / SAMPLE_RATE;
         if (phase >= 1.0)
             phase -= 1.0;
-        return inputFrequency + sin(2.0 * M_PI * phase);
+        double modulation = 20 * sin(2.0 * M_PI * phase);
+        // Modulate the sample with a subtle depth
+        return sample * (1.0 + modulation); // Adjust the modulation depth as needed
     }
 };
 
@@ -143,9 +151,9 @@ public:
     OutputNode(int x, int y)
         : Node(x, y) {}
 
-    double process(double inputFrequency) override
+    double process(double sample) override
     {
-        return inputFrequency;
+        return sample;
     }
 };
 
@@ -154,30 +162,39 @@ Node *connectingNode = nullptr;
 
 void audio_callback(void *userdata, Uint8 *stream, int len)
 {
-    static double phase = 0.0;
     Sint16 *buffer = (Sint16 *)stream;
     int length = len / 2;
 
+    // Initialize the buffer with zeros
     for (int i = 0; i < length; ++i)
     {
-        double sample = 0.0;
-        for (const auto &node : nodes)
+        buffer[i] = 0;
+    }
+
+    // Find the output node
+    OutputNode *outputNode = nullptr;
+    for (const auto &node : nodes)
+    {
+        if (dynamic_cast<OutputNode *>(node.get()))
         {
-            if (node->connected)
-            {
-                double frequency = node->process(0.0); // Start processing from the node
-                if (node->connectedTo)
-                {
-                    frequency = node->connectedTo->process(frequency);
-                }
-                sample += AMPLITUDE * sin(2.0 * M_PI * frequency * phase / SAMPLE_RATE);
-            }
+            outputNode = static_cast<OutputNode *>(node.get());
+            break;
         }
-        buffer[i] = static_cast<Sint16>(sample / nodes.size());
-        phase += 1.0;
-        if (phase >= SAMPLE_RATE)
+    }
+
+    // Process the audio only if the output node is found and connected
+    if (outputNode && outputNode->connected)
+    {
+        for (int i = 0; i < length; ++i)
         {
-            phase -= SAMPLE_RATE;
+            double sample = 0.0;
+            Node *currentNode = outputNode->connectedTo;
+            while (currentNode)
+            {
+                sample = currentNode->process(sample);
+                currentNode = currentNode->connectedTo;
+            }
+            buffer[i] += static_cast<Sint16>(sample);
         }
     }
 }
@@ -260,6 +277,10 @@ int main(int argc, char *argv[])
     Node *draggingNode = nullptr;
     int offsetX = 0, offsetY = 0;
 
+    // Add an initial OutputNode
+    nodes.push_back(std::unique_ptr<OutputNode>(new OutputNode(2 * RECT_WIDTH, 2 * RECT_HEIGHT)));
+    OutputNode *outputNode = static_cast<OutputNode *>(nodes.back().get());
+
     while (!quit)
     {
         elapsedTime += dt;
@@ -298,16 +319,12 @@ int main(int argc, char *argv[])
                             {
                                 connectingNode = node.get();
                             }
-                            else if (connectingNode != node.get() && dynamic_cast<OscillatorNode *>(connectingNode) && dynamic_cast<OutputNode *>(node.get()))
+                            else if (connectingNode != node.get())
                             {
+                                // Disconnect previous connections if any
                                 connectingNode->connected = true;
                                 connectingNode->connectedTo = node.get();
-                                connectingNode = nullptr;
-                            }
-                            else if (connectingNode != node.get() && dynamic_cast<OutputNode *>(connectingNode) && dynamic_cast<OscillatorNode *>(node.get()))
-                            {
-                                node->connected = true;
-                                node->connectedTo = connectingNode;
+                                std::cout << "Connected node: " << typeid(*connectingNode).name() << " to " << typeid(*(connectingNode->connectedTo)).name() << std::endl;
                                 connectingNode = nullptr;
                             }
                             break;
@@ -346,6 +363,7 @@ int main(int argc, char *argv[])
                     int y = rand() % (WINDOW_HEIGHT - RECT_HEIGHT);
                     double frequency = 220.0 + (y / RECT_HEIGHT) * 20.0;
                     nodes.push_back(std::unique_ptr<OscillatorNode>(new OscillatorNode(x, y, frequency)));
+                    std::cout << "Added OscillatorNode at (" << x << ", " << y << ") with frequency " << frequency << std::endl;
                 }
                 else if (e.key.keysym.sym == SDLK_l)
                 {
@@ -353,12 +371,14 @@ int main(int argc, char *argv[])
                     int y = rand() % (WINDOW_HEIGHT - RECT_HEIGHT);
                     double frequency = 1.0 + (y / RECT_HEIGHT) * 0.1;
                     nodes.push_back(std::unique_ptr<LFO>(new LFO(x, y, frequency)));
+                    std::cout << "Added LFO at (" << x << ", " << y << ") with frequency " << frequency << std::endl;
                 }
                 else if (e.key.keysym.sym == SDLK_SPACE)
                 {
                     int x = rand() % (WINDOW_WIDTH - RECT_WIDTH);
                     int y = rand() % (WINDOW_HEIGHT - RECT_HEIGHT);
                     nodes.push_back(std::unique_ptr<OutputNode>(new OutputNode(x, y)));
+                    std::cout << "Added OutputNode at (" << x << ", " << y << ")" << std::endl;
                 }
             }
         }
@@ -411,12 +431,15 @@ int main(int argc, char *argv[])
                 node->draw(ren, lfoTexture);
             }
 
-            if (node->connected && node->connectedTo != nullptr)
+            // Draw connections for all nodes
+            Node *currentNode = node.get();
+            while (currentNode && currentNode->connectedTo)
             {
                 SDL_SetRenderDrawColor(ren, 255, 255, 255, 255);
                 SDL_RenderDrawLine(ren,
-                                   node->targetRect.x + RECT_WIDTH / 2, node->targetRect.y + RECT_HEIGHT / 2,
-                                   node->connectedTo->targetRect.x + RECT_WIDTH / 2, node->connectedTo->targetRect.y + RECT_HEIGHT / 2);
+                                   currentNode->targetRect.x + RECT_WIDTH / 2, currentNode->targetRect.y + RECT_HEIGHT / 2,
+                                   currentNode->connectedTo->targetRect.x + RECT_WIDTH / 2, currentNode->connectedTo->targetRect.y + RECT_HEIGHT / 2);
+                currentNode = currentNode->connectedTo;
             }
         }
 
