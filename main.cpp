@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
+#include <memory>
 
 // Constants
 const int WINDOW_WIDTH = 800;
@@ -13,28 +14,86 @@ const int AMPLITUDE = 28000;
 const float INTERPOLATION_SPEED = 0.4f;
 const float EPSILON = 20.0f; // Threshold for snapping to the exact position
 
-// Enum to differentiate between oscillator and output node
-enum NodeType
+class Node
 {
-    OSCILLATOR,
-    OUTPUT
-};
-
-// Structure to hold pairs of bottom and target rectangles
-struct RectPair
-{
+public:
     SDL_Rect bottomRect;
     SDL_Rect targetRect;
-    double frequency;
-    double angle; // Angle for rotation
-    double scale; // Scale factor
-    NodeType type;
+    double angle;
+    double scale;
     bool connected;
-    RectPair *connectedTo; // Pointer to the connected RectPair
+    Node *connectedTo;
+
+    Node(int x, int y)
+        : angle(0), scale(1.0), connected(false), connectedTo(nullptr)
+    {
+        bottomRect = {x, y, RECT_WIDTH, RECT_HEIGHT};
+        targetRect = {x, y, RECT_WIDTH, RECT_HEIGHT};
+    }
+
+    virtual ~Node() = default;
+
+    virtual double process(double inputFrequency) = 0;
+
+    void updatePosition(float speed)
+    {
+        float distX = bottomRect.x - targetRect.x;
+        float distY = bottomRect.y - targetRect.y;
+        float distance = std::sqrt(distX * distX + distY * distY);
+
+        if (std::abs(distX) < EPSILON && std::abs(distY) < EPSILON)
+        {
+            targetRect.x = bottomRect.x;
+            targetRect.y = bottomRect.y;
+        }
+        else
+        {
+            targetRect.x += static_cast<int>(speed * distX);
+            targetRect.y += static_cast<int>(speed * distY);
+        }
+
+        angle = distX / 5.0; // Update the angle based on the distance
+    }
+
+    void draw(SDL_Renderer *renderer, SDL_Texture *texture)
+    {
+        SDL_Rect scaledRect = {
+            targetRect.x,
+            targetRect.y,
+            static_cast<int>(RECT_WIDTH * scale),
+            static_cast<int>(RECT_HEIGHT * scale)};
+        SDL_RenderCopyEx(renderer, texture, nullptr, &scaledRect, angle, nullptr, SDL_FLIP_NONE);
+    }
 };
 
-std::vector<RectPair> rectanglePairs;
-RectPair *connectingRectPair = nullptr;
+class OscillatorNode : public Node
+{
+public:
+    double frequency;
+
+    OscillatorNode(int x, int y, double freq)
+        : Node(x, y), frequency(freq) {}
+
+    double process(double inputFrequency) override
+    {
+        return frequency;
+    }
+};
+
+class OutputNode : public Node
+{
+public:
+    OutputNode(int x, int y)
+        : Node(x, y) {}
+
+    double process(double inputFrequency) override
+    {
+        return inputFrequency;
+    }
+};
+
+std::vector<std::unique_ptr<Node>> nodes;
+Node *connectingNode = nullptr;
 
 void audio_callback(void *userdata, Uint8 *stream, int len)
 {
@@ -45,43 +104,25 @@ void audio_callback(void *userdata, Uint8 *stream, int len)
     for (int i = 0; i < length; ++i)
     {
         double sample = 0.0;
-        for (const RectPair &rectPair : rectanglePairs)
+        for (const auto &node : nodes)
         {
-            if (rectPair.connected && rectPair.type == OSCILLATOR)
+            if (node->connected)
             {
-                if (rectPair.connectedTo != nullptr && rectPair.connectedTo->type == OUTPUT)
+                double frequency = node->process(0.0); // Start processing from the node
+                if (node->connectedTo)
                 {
-                    sample += AMPLITUDE * sin(2.0 * M_PI * rectPair.frequency * phase / SAMPLE_RATE);
+                    frequency = node->connectedTo->process(frequency);
                 }
+                sample += AMPLITUDE * sin(2.0 * M_PI * frequency * phase / SAMPLE_RATE);
             }
         }
-        buffer[i] = static_cast<Sint16>(sample / rectanglePairs.size());
+        buffer[i] = static_cast<Sint16>(sample / nodes.size());
         phase += 1.0;
         if (phase >= SAMPLE_RATE)
         {
             phase -= SAMPLE_RATE;
         }
     }
-}
-
-void updateTargetRectPosition(RectPair &rectPair, float speed)
-{
-    float distX = rectPair.bottomRect.x - rectPair.targetRect.x;
-    float distY = rectPair.bottomRect.y - rectPair.targetRect.y;
-    float distance = std::sqrt(distX * distX + distY * distY);
-
-    if (std::abs(distX) < EPSILON && std::abs(distY) < EPSILON)
-    {
-        rectPair.targetRect.x = rectPair.bottomRect.x;
-        rectPair.targetRect.y = rectPair.bottomRect.y;
-    }
-    else
-    {
-        rectPair.targetRect.x += static_cast<int>(speed * distX);
-        rectPair.targetRect.y += static_cast<int>(speed * distY);
-    }
-
-    rectPair.angle = distX / 5.0; // Update the angle based on the distance
 }
 
 SDL_Texture *createRectangleTexture(SDL_Renderer *renderer, int width, int height, SDL_Color color)
@@ -157,7 +198,7 @@ int main(int argc, char *argv[])
     bool quit = false;
     SDL_Event e;
     bool dragging = false;
-    RectPair *draggingRectPair = nullptr;
+    Node *draggingNode = nullptr;
     int offsetX = 0, offsetY = 0;
 
     while (!quit)
@@ -172,42 +213,42 @@ int main(int argc, char *argv[])
             {
                 if (e.button.button == SDL_BUTTON_LEFT)
                 {
-                    for (RectPair &rectPair : rectanglePairs)
+                    for (auto &node : nodes)
                     {
-                        if (e.button.x >= rectPair.bottomRect.x && e.button.x <= rectPair.bottomRect.x + rectPair.bottomRect.w &&
-                            e.button.y >= rectPair.bottomRect.y && e.button.y <= rectPair.bottomRect.y + rectPair.bottomRect.h)
+                        if (e.button.x >= node->bottomRect.x && e.button.x <= node->bottomRect.x + node->bottomRect.w &&
+                            e.button.y >= node->bottomRect.y && e.button.y <= node->bottomRect.y + node->bottomRect.h)
                         {
                             dragging = true;
-                            draggingRectPair = &rectPair;
-                            offsetX = e.button.x - rectPair.bottomRect.x;
-                            offsetY = e.button.y - rectPair.bottomRect.y;
-                            rectPair.scale = 1.3;
+                            draggingNode = node.get();
+                            offsetX = e.button.x - node->bottomRect.x;
+                            offsetY = e.button.y - node->bottomRect.y;
+                            node->scale = 1.3;
                             break;
                         }
                     }
                 }
                 else if (e.button.button == SDL_BUTTON_RIGHT)
                 {
-                    for (RectPair &rectPair : rectanglePairs)
+                    for (auto &node : nodes)
                     {
-                        if (e.button.x >= rectPair.bottomRect.x && e.button.x <= rectPair.bottomRect.x + rectPair.bottomRect.w &&
-                            e.button.y >= rectPair.bottomRect.y && e.button.y <= rectPair.bottomRect.y + rectPair.bottomRect.h)
+                        if (e.button.x >= node->bottomRect.x && e.button.x <= node->bottomRect.x + node->bottomRect.w &&
+                            e.button.y >= node->bottomRect.y && e.button.y <= node->bottomRect.y + node->bottomRect.h)
                         {
-                            if (connectingRectPair == nullptr)
+                            if (connectingNode == nullptr)
                             {
-                                connectingRectPair = &rectPair;
+                                connectingNode = node.get();
                             }
-                            else if (connectingRectPair != &rectPair && connectingRectPair->type == OSCILLATOR && rectPair.type == OUTPUT)
+                            else if (connectingNode != node.get() && dynamic_cast<OscillatorNode *>(connectingNode) && dynamic_cast<OutputNode *>(node.get()))
                             {
-                                connectingRectPair->connected = true;
-                                connectingRectPair->connectedTo = &rectPair;
-                                connectingRectPair = nullptr;
+                                connectingNode->connected = true;
+                                connectingNode->connectedTo = node.get();
+                                connectingNode = nullptr;
                             }
-                            else if (connectingRectPair != &rectPair && connectingRectPair->type == OUTPUT && rectPair.type == OSCILLATOR)
+                            else if (connectingNode != node.get() && dynamic_cast<OutputNode *>(connectingNode) && dynamic_cast<OscillatorNode *>(node.get()))
                             {
-                                rectPair.connected = true;
-                                rectPair.connectedTo = connectingRectPair;
-                                connectingRectPair = nullptr;
+                                node->connected = true;
+                                node->connectedTo = connectingNode;
+                                connectingNode = nullptr;
                             }
                             break;
                         }
@@ -219,45 +260,45 @@ int main(int argc, char *argv[])
                 if (e.button.button == SDL_BUTTON_LEFT)
                 {
                     dragging = false;
-                    draggingRectPair->scale = 1.0;
-                    if (draggingRectPair != nullptr)
+                    if (draggingNode != nullptr)
                     {
-                        draggingRectPair->bottomRect.x = ((draggingRectPair->bottomRect.x + RECT_WIDTH / 2) / RECT_WIDTH) * RECT_WIDTH;
-                        draggingRectPair->bottomRect.y = ((draggingRectPair->bottomRect.y + RECT_HEIGHT / 2) / RECT_HEIGHT) * RECT_HEIGHT;
-                        draggingRectPair = nullptr;
+                        draggingNode->scale = 1.0;
+                        draggingNode->bottomRect.x = ((draggingNode->bottomRect.x + RECT_WIDTH / 2) / RECT_WIDTH) * RECT_WIDTH;
+                        draggingNode->bottomRect.y = ((draggingNode->bottomRect.y + RECT_HEIGHT / 2) / RECT_HEIGHT) * RECT_HEIGHT;
+                        draggingNode = nullptr;
                     }
                 }
             }
             else if (e.type == SDL_MOUSEMOTION)
             {
-                if (dragging && draggingRectPair != nullptr)
+                if (dragging && draggingNode != nullptr)
                 {
-                    draggingRectPair->bottomRect.x = e.motion.x - offsetX;
-                    draggingRectPair->bottomRect.y = e.motion.y - offsetY;
+                    draggingNode->bottomRect.x = e.motion.x - offsetX;
+                    draggingNode->bottomRect.y = e.motion.y - offsetY;
                 }
             }
             else if (e.type == SDL_KEYDOWN)
             {
                 if (e.key.keysym.sym == SDLK_o)
                 {
-                    SDL_Rect newRect = {rand() % (WINDOW_WIDTH - RECT_WIDTH), rand() % (WINDOW_HEIGHT - RECT_HEIGHT), RECT_WIDTH, RECT_HEIGHT};
-                    SDL_Rect newTargetRect = {newRect.x, newRect.y, RECT_WIDTH, RECT_HEIGHT};
-                    double frequency = 220.0 + (newRect.y / RECT_HEIGHT) * 20.0;
-                    rectanglePairs.push_back({newRect, newTargetRect, frequency, 0.0, 1.0, OSCILLATOR, false, nullptr});
+                    int x = rand() % (WINDOW_WIDTH - RECT_WIDTH);
+                    int y = rand() % (WINDOW_HEIGHT - RECT_HEIGHT);
+                    double frequency = 220.0 + (y / RECT_HEIGHT) * 20.0;
+                    nodes.push_back(std::unique_ptr<OscillatorNode>(new OscillatorNode(x, y, frequency)));
                 }
                 else if (e.key.keysym.sym == SDLK_SPACE)
                 {
-                    SDL_Rect newRect = {rand() % (WINDOW_WIDTH - RECT_WIDTH), rand() % (WINDOW_HEIGHT - RECT_HEIGHT), RECT_WIDTH, RECT_HEIGHT};
-                    SDL_Rect newTargetRect = {newRect.x, newRect.y, RECT_WIDTH, RECT_HEIGHT};
-                    rectanglePairs.push_back({newRect, newTargetRect, 0.0, 0.0, 1.0, OUTPUT, false, nullptr});
+                    int x = rand() % (WINDOW_WIDTH - RECT_WIDTH);
+                    int y = rand() % (WINDOW_HEIGHT - RECT_HEIGHT);
+                    nodes.push_back(std::unique_ptr<OutputNode>(new OutputNode(x, y)));
                 }
             }
         }
 
         // Update the position and scale of each target rectangle using linear interpolation
-        for (RectPair &rectPair : rectanglePairs)
+        for (auto &node : nodes)
         {
-            updateTargetRectPosition(rectPair, INTERPOLATION_SPEED);
+            node->updatePosition(INTERPOLATION_SPEED);
         }
 
         SDL_SetRenderDrawColor(ren, 0x00, 0x00, 0x00, 0xFF);
@@ -273,31 +314,25 @@ int main(int argc, char *argv[])
             }
         }
 
-        for (const RectPair &rectPair : rectanglePairs)
+        for (const auto &node : nodes)
         {
-            SDL_RenderCopy(ren, transparentTexture, nullptr, &rectPair.bottomRect);
+            SDL_RenderCopy(ren, transparentTexture, nullptr, &node->bottomRect);
 
-            SDL_Rect scaledRect = {
-                rectPair.targetRect.x,
-                rectPair.targetRect.y,
-                static_cast<int>(RECT_WIDTH * rectPair.scale),
-                static_cast<int>(RECT_HEIGHT * rectPair.scale)};
-
-            if (rectPair.type == OSCILLATOR)
+            if (dynamic_cast<OscillatorNode *>(node.get()))
             {
-                SDL_RenderCopyEx(ren, oscillatorTexture, nullptr, &scaledRect, rectPair.angle, nullptr, SDL_FLIP_NONE);
+                node->draw(ren, oscillatorTexture);
             }
-            else if (rectPair.type == OUTPUT)
+            else if (dynamic_cast<OutputNode *>(node.get()))
             {
-                SDL_RenderCopyEx(ren, outputTexture, nullptr, &scaledRect, rectPair.angle, nullptr, SDL_FLIP_NONE);
+                node->draw(ren, outputTexture);
             }
 
-            if (rectPair.connected && rectPair.connectedTo != nullptr)
+            if (node->connected && node->connectedTo != nullptr)
             {
                 SDL_SetRenderDrawColor(ren, 255, 255, 255, 255);
                 SDL_RenderDrawLine(ren,
-                                   rectPair.targetRect.x + RECT_WIDTH / 2, rectPair.targetRect.y + RECT_HEIGHT / 2,
-                                   rectPair.connectedTo->targetRect.x + RECT_WIDTH / 2, rectPair.connectedTo->targetRect.y + RECT_HEIGHT / 2);
+                                   node->targetRect.x + RECT_WIDTH / 2, node->targetRect.y + RECT_HEIGHT / 2,
+                                   node->connectedTo->targetRect.x + RECT_WIDTH / 2, node->connectedTo->targetRect.y + RECT_HEIGHT / 2);
             }
         }
 
