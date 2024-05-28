@@ -27,6 +27,7 @@ struct RectPair
     SDL_Rect targetRect;
     double frequency;
     double angle; // Angle for rotation
+    double scale; // Scale factor
     NodeType type;
     bool connected;
     RectPair *connectedTo; // Pointer to the connected RectPair
@@ -67,6 +68,7 @@ void updateTargetRectPosition(RectPair &rectPair, float speed)
 {
     float distX = rectPair.bottomRect.x - rectPair.targetRect.x;
     float distY = rectPair.bottomRect.y - rectPair.targetRect.y;
+    float distance = std::sqrt(distX * distX + distY * distY);
 
     if (std::abs(distX) < EPSILON && std::abs(distY) < EPSILON)
     {
@@ -179,6 +181,7 @@ int main(int argc, char *argv[])
                             draggingRectPair = &rectPair;
                             offsetX = e.button.x - rectPair.bottomRect.x;
                             offsetY = e.button.y - rectPair.bottomRect.y;
+                            rectPair.scale = 1.3;
                             break;
                         }
                     }
@@ -216,6 +219,7 @@ int main(int argc, char *argv[])
                 if (e.button.button == SDL_BUTTON_LEFT)
                 {
                     dragging = false;
+                    draggingRectPair->scale = 1.0;
                     if (draggingRectPair != nullptr)
                     {
                         draggingRectPair->bottomRect.x = ((draggingRectPair->bottomRect.x + RECT_WIDTH / 2) / RECT_WIDTH) * RECT_WIDTH;
@@ -239,18 +243,18 @@ int main(int argc, char *argv[])
                     SDL_Rect newRect = {rand() % (WINDOW_WIDTH - RECT_WIDTH), rand() % (WINDOW_HEIGHT - RECT_HEIGHT), RECT_WIDTH, RECT_HEIGHT};
                     SDL_Rect newTargetRect = {newRect.x, newRect.y, RECT_WIDTH, RECT_HEIGHT};
                     double frequency = 220.0 + (newRect.y / RECT_HEIGHT) * 20.0;
-                    rectanglePairs.push_back({newRect, newTargetRect, frequency, 0.0, OSCILLATOR, false, nullptr});
+                    rectanglePairs.push_back({newRect, newTargetRect, frequency, 0.0, 1.0, OSCILLATOR, false, nullptr});
                 }
                 else if (e.key.keysym.sym == SDLK_SPACE)
                 {
                     SDL_Rect newRect = {rand() % (WINDOW_WIDTH - RECT_WIDTH), rand() % (WINDOW_HEIGHT - RECT_HEIGHT), RECT_WIDTH, RECT_HEIGHT};
                     SDL_Rect newTargetRect = {newRect.x, newRect.y, RECT_WIDTH, RECT_HEIGHT};
-                    rectanglePairs.push_back({newRect, newTargetRect, 0.0, 0.0, OUTPUT, false, nullptr});
+                    rectanglePairs.push_back({newRect, newTargetRect, 0.0, 0.0, 1.0, OUTPUT, false, nullptr});
                 }
             }
         }
 
-        // Update the position of each target rectangle using linear interpolation
+        // Update the position and scale of each target rectangle using linear interpolation
         for (RectPair &rectPair : rectanglePairs)
         {
             updateTargetRectPosition(rectPair, INTERPOLATION_SPEED);
@@ -273,13 +277,19 @@ int main(int argc, char *argv[])
         {
             SDL_RenderCopy(ren, transparentTexture, nullptr, &rectPair.bottomRect);
 
+            SDL_Rect scaledRect = {
+                rectPair.targetRect.x,
+                rectPair.targetRect.y,
+                static_cast<int>(RECT_WIDTH * rectPair.scale),
+                static_cast<int>(RECT_HEIGHT * rectPair.scale)};
+
             if (rectPair.type == OSCILLATOR)
             {
-                SDL_RenderCopyEx(ren, oscillatorTexture, nullptr, &rectPair.targetRect, rectPair.angle, nullptr, SDL_FLIP_NONE);
+                SDL_RenderCopyEx(ren, oscillatorTexture, nullptr, &scaledRect, rectPair.angle, nullptr, SDL_FLIP_NONE);
             }
             else if (rectPair.type == OUTPUT)
             {
-                SDL_RenderCopyEx(ren, outputTexture, nullptr, &rectPair.targetRect, rectPair.angle, nullptr, SDL_FLIP_NONE);
+                SDL_RenderCopyEx(ren, outputTexture, nullptr, &scaledRect, rectPair.angle, nullptr, SDL_FLIP_NONE);
             }
 
             if (rectPair.connected && rectPair.connectedTo != nullptr)
